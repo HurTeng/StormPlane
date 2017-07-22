@@ -4,7 +4,7 @@
 ##
 **已经在华为、小米等手机上测试通过，同时也支持各种机型，欢迎下载：[点击下载](https://fir.im/an5s)**
 
-若以上链接失效，请戳这里：[apk下载](app/app-release.apk)
+若以上链接失效，请戳这里：[apk下载](https://github.com/HurTeng/StormPlane/raw/master/app/app-release.apk)
 
 ----
 游戏说明
