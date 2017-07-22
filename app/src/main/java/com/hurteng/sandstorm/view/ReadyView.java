@@ -32,7 +32,7 @@ public class ReadyView extends BaseView {
     private boolean isBtChange2;
     private String startGame = "开始游戏";
     private String exitGame = "退出游戏";
-    private String version = "Omega特别版";
+    private String version = "HurTeng特别版";
     private float version_width;//版本信息宽度
     private float version_height;//版本信息长度
 
