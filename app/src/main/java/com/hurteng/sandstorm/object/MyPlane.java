@@ -48,7 +48,7 @@ public class MyPlane extends GameObject implements IMyPlane {
 
         factory = new GameObjectFactory();
         bullets = new ArrayList<Bullet>();
-        changeButtle(ConstantUtil.MYBULLET);
+        changeBullet(ConstantUtil.MYBULLET);
         bulletType = ConstantUtil.MYBULLET;
     }
 
@@ -184,7 +184,7 @@ public class MyPlane extends GameObject implements IMyPlane {
      * 初始化子弹
      */
     @Override
-    public void initButtle() {
+    public void initBullet() {
         // TODO Auto-generated method stub
         for (Bullet obj : bullets) {
             if (!obj.isAlive()) {
@@ -199,7 +199,7 @@ public class MyPlane extends GameObject implements IMyPlane {
      * @param type
      */
     @Override
-    public void changeButtle(int type) {
+    public void changeBullet(int type) {
         bulletType = type;
         bullets.clear();
         if (isChangeBullet) {
@@ -235,7 +235,7 @@ public class MyPlane extends GameObject implements IMyPlane {
                 isChangeBullet = false;
                 startTime = 0;
                 endTime = 0;
-                changeButtle(ConstantUtil.MYBULLET);
+                changeBullet(ConstantUtil.MYBULLET);
             }
         }
     }

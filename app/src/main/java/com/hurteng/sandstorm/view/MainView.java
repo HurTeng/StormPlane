@@ -386,7 +386,7 @@ public class MainView extends BaseView {
 		// 初始化BOSS飞机的子弹
 		if (bossPlane.isAlive()) {
 			if (!myPlane.getMissileState()) {
-				bossPlane.initButtle();
+				bossPlane.initBullet();
 			}
 		}
 
@@ -394,13 +394,13 @@ public class MainView extends BaseView {
 		for (BigPlane big_plane : bigPlanes) {
 			if (big_plane.isAlive()) {
 				if (!myPlane.getMissileState()) {
-					big_plane.initButtle();
+					big_plane.initBullet();
 				}
 			}
 		}
 
 		myPlane.isBulletOverTime();
-		myPlane.initButtle(); // 初始化玩家飞机的子弹
+		myPlane.initBullet(); // 初始化玩家飞机的子弹
 		// 提升等级
 		if (sumScore >= speedTime * GameConstant.LEVELUP_SCORE && speedTime < GameConstant.MAXGRADE) {
 			speedTime++;
@@ -539,7 +539,7 @@ public class MainView extends BaseView {
 					sounds.playSound(6, 0);
 
 					myPlane.setChangeBullet(true);
-					myPlane.changeButtle(ConstantUtil.MYBULLET1);
+					myPlane.changeBullet(ConstantUtil.MYBULLET1);
 					myPlane.setStartTime(System.currentTimeMillis());
 
 				} else
@@ -552,7 +552,7 @@ public class MainView extends BaseView {
 					sounds.playSound(6, 0);
 
 					myPlane.setChangeBullet(true);
-					myPlane.changeButtle(ConstantUtil.MYBULLET2);
+					myPlane.changeBullet(ConstantUtil.MYBULLET2);
 					myPlane.setStartTime(System.currentTimeMillis());
 
 				} else
