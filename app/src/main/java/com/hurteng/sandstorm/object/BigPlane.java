@@ -119,7 +119,7 @@ public class BigPlane extends EnemyPlane {
 		}
 	
 	// 初始化子弹对象
-	public void initButtle() {
+	public void initBullet() {
 		
 		if (isFire) {
 			if (interval == 1) {

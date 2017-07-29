@@ -31,12 +31,12 @@ public interface IMyPlane {
     /**
      * 初始化子弹
      */
-    public void initButtle();
+    public void initBullet();
 
     /**
      * 改变子弹类型
      *
      * @param type
      */
-    public void changeButtle(int type);
+    public void changeBullet(int type);
 }

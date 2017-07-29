@@ -52,7 +52,7 @@ public class BossPlane extends EnemyPlane {
         factory = new GameObjectFactory();
 
         // bulletType = ConstantUtil.BOSSBULLET_DEFAULT;
-        changeButtle(bulletType);
+        changeBullet(bulletType);
 
     }
 
@@ -125,7 +125,7 @@ public class BossPlane extends EnemyPlane {
     /**
      * 初始化子弹
      */
-    public void initButtle() {
+    public void initBullet() {
         if (isFire) {
             if (interval == 1) {
                 for (GameObject obj : bullets) {
@@ -223,7 +223,7 @@ public class BossPlane extends EnemyPlane {
                     isExplosion = false;
                     isAlive = false;
                     if (bulletType != ConstantUtil.BOSSBULLET_DEFAULT) {
-                        changeButtle(ConstantUtil.BOSSBULLET_DEFAULT);
+                        changeBullet(ConstantUtil.BOSSBULLET_DEFAULT);
                     }
                 }
 
@@ -297,7 +297,7 @@ public class BossPlane extends EnemyPlane {
                 if (!isAnger) {
                     isAnger = true;
                     if (bulletType != ConstantUtil.BOSSBULLET_ANGER) {
-                        changeButtle(ConstantUtil.BOSSBULLET_ANGER);
+                        changeBullet(ConstantUtil.BOSSBULLET_ANGER);
                     }
                 }
             }
@@ -313,7 +313,7 @@ public class BossPlane extends EnemyPlane {
                     isCrazy = true;
                     speed = 20 + 3 * speedTime;
                     if (bulletType != ConstantUtil.BOSSBULLET_CRAZY) {
-                        changeButtle(ConstantUtil.BOSSBULLET_CRAZY);
+                        changeBullet(ConstantUtil.BOSSBULLET_CRAZY);
                     }
                 }
             }
@@ -332,7 +332,7 @@ public class BossPlane extends EnemyPlane {
                     isLimit = true;
                     speed = 30 + 5 * speedTime;
                     if (bulletType != ConstantUtil.BOSSBULLET_LIMIT) {
-                        changeButtle(ConstantUtil.BOSSBULLET_LIMIT);
+                        changeBullet(ConstantUtil.BOSSBULLET_LIMIT);
                     }
                 }
 
@@ -424,7 +424,7 @@ public class BossPlane extends EnemyPlane {
         }
     }
 
-    public void changeButtle(int type) {
+    public void changeBullet(int type) {
         bulletType = type;
 
         // 清理原先的子弹
