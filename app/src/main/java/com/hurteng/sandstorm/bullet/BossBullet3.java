@@ -1,4 +1,4 @@
-package com.hurteng.sandstorm.object;
+package com.hurteng.sandstorm.bullet;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -6,16 +6,21 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
 import com.hurteng.sandstorm.myplane.R;
+import com.hurteng.sandstorm.object.EnemyBullet;
+import com.hurteng.sandstorm.object.GameObject;
 
 import java.util.Random;
 
+
 /**
- * BOSS子弹1
+ * Boss子弹3
+ * @author Administrator
+ *
  */
-public class BossBullet1 extends EnemyBullet {
+public class BossBullet3 extends EnemyBullet {
 	private Bitmap bullet;
 
-	public BossBullet1(Resources resources) {
+	public BossBullet3(Resources resources) {
 		super(resources);
 	}
 
@@ -23,14 +28,16 @@ public class BossBullet1 extends EnemyBullet {
 	public void initial(int arg0, float arg1, float arg2) {
 		isAlive = true;
 		Random random = new Random();
-		speed = random.nextInt(5) + 5;
+		speed = random.nextInt(8) + 5;
 		object_x = arg1 - object_width / 2;
 		object_y = arg2 - object_height;
+		
+		//obj.initial(0, object_x + object_width / 2,object_height);
 	}
 
 	@Override
 	public void initBitmap() {
-		bullet = BitmapFactory.decodeResource(resources, R.drawable.bossbullet1);
+		bullet = BitmapFactory.decodeResource(resources, R.drawable.boss_bullet_thunderball_green);
 		object_width = bullet.getWidth();
 		object_height = bullet.getHeight();
 	}
@@ -58,7 +65,7 @@ public class BossBullet1 extends EnemyBullet {
 	public void logic() {
 		if (object_y >= 0) {
 			object_y -= speed;
-			object_x += 80*Math.sin(System.currentTimeMillis()/1000);
+			object_x += 20*(Math.sin(object_y));
 		} else {
 			isAlive = false;
 		}

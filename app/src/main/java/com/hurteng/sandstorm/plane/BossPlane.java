@@ -1,14 +1,23 @@
-package com.hurteng.sandstorm.object;
+package com.hurteng.sandstorm.plane;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
+import com.hurteng.sandstorm.bullet.BossBullet;
+import com.hurteng.sandstorm.bullet.BossBullet1;
+import com.hurteng.sandstorm.bullet.BossBullet2;
+import com.hurteng.sandstorm.bullet.BossBullet3;
+import com.hurteng.sandstorm.bullet.BossBullet4;
+import com.hurteng.sandstorm.bullet.BossBullet5;
+import com.hurteng.sandstorm.bullet.BossBulletDefault;
+import com.hurteng.sandstorm.bullet.Bullet;
 import com.hurteng.sandstorm.constant.ConstantUtil;
 import com.hurteng.sandstorm.constant.GameConstant;
 import com.hurteng.sandstorm.factory.GameObjectFactory;
 import com.hurteng.sandstorm.myplane.R;
+import com.hurteng.sandstorm.object.GameObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,7 +124,7 @@ public class BossPlane extends EnemyPlane {
         boosPlane = BitmapFactory.decodeResource(resources,
                 R.drawable.boosplane);
         boosPlaneBomb = BitmapFactory.decodeResource(resources,
-                R.drawable.bossplanebomb);
+                R.drawable.bossplane_bomb);
         bossPlane_crazy = BitmapFactory.decodeResource(resources,
                 R.drawable.bossplane_crazy);
         object_width = boosPlane.getWidth(); // ���ÿһ֡λͼ�Ŀ�

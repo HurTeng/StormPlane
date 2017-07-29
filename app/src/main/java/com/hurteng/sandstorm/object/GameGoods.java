@@ -17,7 +17,6 @@ public class GameGoods extends GameObject {
 
     public GameGoods(Resources resources) {
         super(resources);
-        // TODO Auto-generated constructor stub
         this.speed = 10;
         Random ran = new Random();
         direction = ran.nextInt(2) + 3;
@@ -49,7 +48,6 @@ public class GameGoods extends GameObject {
 
     @Override
     public void release() {
-        // TODO Auto-generated method stub
         if (!bmp.isRecycled()) {
             bmp.recycle();
         }

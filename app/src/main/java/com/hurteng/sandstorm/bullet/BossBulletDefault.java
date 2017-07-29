@@ -1,4 +1,4 @@
-package com.hurteng.sandstorm.object;
+package com.hurteng.sandstorm.bullet;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -6,6 +6,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
 import com.hurteng.sandstorm.myplane.R;
+import com.hurteng.sandstorm.object.EnemyBullet;
+import com.hurteng.sandstorm.object.GameObject;
+import com.hurteng.sandstorm.plane.MyPlane;
+import com.hurteng.sandstorm.plane.SmallPlane;
 
 /**
  * Boss默认的子弹
@@ -40,7 +44,6 @@ public class BossBulletDefault extends EnemyBullet {
 	// 初始化图片资源的
 	@Override
 	public void initBitmap() {
-		// TODO Auto-generated method stub
 		bullet = BitmapFactory.decodeResource(resources, R.drawable.bossbullet_default);
 		object_width = bullet.getWidth();
 		object_height = bullet.getHeight();

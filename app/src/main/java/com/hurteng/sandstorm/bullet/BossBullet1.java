@@ -1,4 +1,4 @@
-package com.hurteng.sandstorm.object;
+package com.hurteng.sandstorm.bullet;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -6,36 +6,37 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
 import com.hurteng.sandstorm.myplane.R;
+import com.hurteng.sandstorm.object.EnemyBullet;
+import com.hurteng.sandstorm.object.GameObject;
+
+import java.util.Random;
 
 /**
- * 大型机子弹
+ * BOSS子弹1
  */
-public class BigPlaneBullet extends EnemyBullet {
-
+public class BossBullet1 extends EnemyBullet {
 	private Bitmap bullet;
 
-	public BigPlaneBullet(Resources resources) {
+	public BossBullet1(Resources resources) {
 		super(resources);
 	}
 
-	// 初始化数据
 	@Override
 	public void initial(int arg0, float arg1, float arg2) {
 		isAlive = true;
-		speed = 50;
+		Random random = new Random();
+		speed = random.nextInt(5) + 5;
 		object_x = arg1 - object_width / 2;
 		object_y = arg2 - object_height;
 	}
 
-	// 初始化图片的资源
 	@Override
 	public void initBitmap() {
-		bullet = BitmapFactory.decodeResource(resources, R.drawable.bigplane_bullet);
+		bullet = BitmapFactory.decodeResource(resources, R.drawable.boss_bullet_sun_particle);
 		object_width = bullet.getWidth();
 		object_height = bullet.getHeight();
 	}
 
-	// 对象的绘图方法
 	@Override
 	public void drawSelf(Canvas canvas) {
 		if (isAlive) {
@@ -48,7 +49,6 @@ public class BigPlaneBullet extends EnemyBullet {
 		}
 	}
 
-	// 释放资源的方法
 	@Override
 	public void release() {
 		if (!bullet.isRecycled()) {
@@ -56,20 +56,19 @@ public class BigPlaneBullet extends EnemyBullet {
 		}
 	}
 
-	// 对象的逻辑函数
 	@Override
 	public void logic() {
-		if (object_y <= screen_height) {
-			object_y += speed;
-			object_x += 30*Math.sin(System.currentTimeMillis()/1000);
+		if (object_y >= 0) {
+			object_y -= speed;
+			object_x += 80*Math.sin(System.currentTimeMillis()/1000);
 		} else {
 			isAlive = false;
 		}
 	}
 
+	// 碰撞检测
 	@Override
 	public boolean isCollide(GameObject obj) {
 		return super.isCollide(obj);
 	}
-
 }

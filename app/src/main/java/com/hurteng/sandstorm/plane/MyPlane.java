@@ -1,4 +1,4 @@
-package com.hurteng.sandstorm.object;
+package com.hurteng.sandstorm.plane;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -6,12 +6,17 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.SystemClock;
 
+import com.hurteng.sandstorm.bullet.Bullet;
+import com.hurteng.sandstorm.bullet.MyBullet;
+import com.hurteng.sandstorm.bullet.MyBullet1;
+import com.hurteng.sandstorm.bullet.MyBullet2;
 import com.hurteng.sandstorm.constant.ConstantUtil;
 import com.hurteng.sandstorm.constant.DebugConstant;
 import com.hurteng.sandstorm.constant.GameConstant;
 import com.hurteng.sandstorm.factory.GameObjectFactory;
 import com.hurteng.sandstorm.interfaces.IMyPlane;
 import com.hurteng.sandstorm.myplane.R;
+import com.hurteng.sandstorm.object.GameObject;
 import com.hurteng.sandstorm.view.MainView;
 
 import java.util.ArrayList;
@@ -185,7 +190,6 @@ public class MyPlane extends GameObject implements IMyPlane {
      */
     @Override
     public void initBullet() {
-        // TODO Auto-generated method stub
         for (Bullet obj : bullets) {
             if (!obj.isAlive()) {
                 obj.initial(0, middle_x, middle_y);

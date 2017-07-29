@@ -1,13 +1,16 @@
-package com.hurteng.sandstorm.object;
+package com.hurteng.sandstorm.plane;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
+import com.hurteng.sandstorm.bullet.BigPlaneBullet;
+import com.hurteng.sandstorm.bullet.Bullet;
 import com.hurteng.sandstorm.constant.GameConstant;
 import com.hurteng.sandstorm.factory.GameObjectFactory;
 import com.hurteng.sandstorm.myplane.R;
+import com.hurteng.sandstorm.object.GameObject;
 
 import java.util.ArrayList;
 import java.util.List;

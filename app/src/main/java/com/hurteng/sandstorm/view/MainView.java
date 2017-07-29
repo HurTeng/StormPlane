@@ -18,17 +18,17 @@ import com.hurteng.sandstorm.constant.DebugConstant;
 import com.hurteng.sandstorm.constant.GameConstant;
 import com.hurteng.sandstorm.factory.GameObjectFactory;
 import com.hurteng.sandstorm.myplane.R;
-import com.hurteng.sandstorm.object.BigPlane;
-import com.hurteng.sandstorm.object.BossPlane;
+import com.hurteng.sandstorm.plane.BigPlane;
+import com.hurteng.sandstorm.plane.BossPlane;
 import com.hurteng.sandstorm.object.BulletGoods1;
 import com.hurteng.sandstorm.object.BulletGoods2;
-import com.hurteng.sandstorm.object.EnemyPlane;
+import com.hurteng.sandstorm.plane.EnemyPlane;
 import com.hurteng.sandstorm.object.GameObject;
 import com.hurteng.sandstorm.object.LifeGoods;
-import com.hurteng.sandstorm.object.MiddlePlane;
+import com.hurteng.sandstorm.plane.MiddlePlane;
 import com.hurteng.sandstorm.object.MissileGoods;
-import com.hurteng.sandstorm.object.MyPlane;
-import com.hurteng.sandstorm.object.SmallPlane;
+import com.hurteng.sandstorm.plane.MyPlane;
+import com.hurteng.sandstorm.plane.SmallPlane;
 import com.hurteng.sandstorm.sounds.GameSoundPool;
 
 /**

@@ -3,7 +3,7 @@ package com.hurteng.sandstorm.interfaces;
 
 import android.graphics.Canvas;
 
-import com.hurteng.sandstorm.object.EnemyPlane;
+import com.hurteng.sandstorm.plane.EnemyPlane;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.hurteng.sandstorm.object;
+package com.hurteng.sandstorm.bullet;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -7,6 +7,8 @@ import android.graphics.Canvas;
 
 import com.hurteng.sandstorm.constant.GameConstant;
 import com.hurteng.sandstorm.myplane.R;
+import com.hurteng.sandstorm.object.GameObject;
+import com.hurteng.sandstorm.plane.SmallPlane;
 
 /**
  * 我方机体子弹1

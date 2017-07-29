@@ -1,7 +1,9 @@
-package com.hurteng.sandstorm.object;
+package com.hurteng.sandstorm.plane;
 
 import android.content.res.Resources;
 import android.graphics.Canvas;
+
+import com.hurteng.sandstorm.object.GameObject;
 
 /**
  * 敌机类
@@ -35,7 +37,6 @@ public class EnemyPlane extends GameObject {
      */
     @Override
     public void initBitmap() {
-        // TODO Auto-generated method stub
 
     }
 

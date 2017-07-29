@@ -2,27 +2,27 @@ package com.hurteng.sandstorm.factory;
 
 import android.content.res.Resources;
 
-import com.hurteng.sandstorm.object.BigPlane;
-import com.hurteng.sandstorm.object.BigPlaneBullet;
-import com.hurteng.sandstorm.object.BossBullet;
-import com.hurteng.sandstorm.object.BossBullet1;
-import com.hurteng.sandstorm.object.BossBullet2;
-import com.hurteng.sandstorm.object.BossBullet3;
-import com.hurteng.sandstorm.object.BossBullet4;
-import com.hurteng.sandstorm.object.BossBullet5;
-import com.hurteng.sandstorm.object.BossBulletDefault;
-import com.hurteng.sandstorm.object.BossPlane;
+import com.hurteng.sandstorm.plane.BigPlane;
+import com.hurteng.sandstorm.bullet.BigPlaneBullet;
+import com.hurteng.sandstorm.bullet.BossBullet;
+import com.hurteng.sandstorm.bullet.BossBullet1;
+import com.hurteng.sandstorm.bullet.BossBullet2;
+import com.hurteng.sandstorm.bullet.BossBullet3;
+import com.hurteng.sandstorm.bullet.BossBullet4;
+import com.hurteng.sandstorm.bullet.BossBullet5;
+import com.hurteng.sandstorm.bullet.BossBulletDefault;
+import com.hurteng.sandstorm.plane.BossPlane;
 import com.hurteng.sandstorm.object.BulletGoods1;
 import com.hurteng.sandstorm.object.BulletGoods2;
 import com.hurteng.sandstorm.object.GameObject;
 import com.hurteng.sandstorm.object.LifeGoods;
-import com.hurteng.sandstorm.object.MiddlePlane;
+import com.hurteng.sandstorm.plane.MiddlePlane;
 import com.hurteng.sandstorm.object.MissileGoods;
-import com.hurteng.sandstorm.object.MyBullet;
-import com.hurteng.sandstorm.object.MyBullet1;
-import com.hurteng.sandstorm.object.MyBullet2;
-import com.hurteng.sandstorm.object.MyPlane;
-import com.hurteng.sandstorm.object.SmallPlane;
+import com.hurteng.sandstorm.bullet.MyBullet;
+import com.hurteng.sandstorm.bullet.MyBullet1;
+import com.hurteng.sandstorm.bullet.MyBullet2;
+import com.hurteng.sandstorm.plane.MyPlane;
+import com.hurteng.sandstorm.plane.SmallPlane;
 
 
 /**

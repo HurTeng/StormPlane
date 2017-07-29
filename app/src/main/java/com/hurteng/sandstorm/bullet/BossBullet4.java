@@ -1,4 +1,4 @@
-package com.hurteng.sandstorm.object;
+package com.hurteng.sandstorm.bullet;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
 import com.hurteng.sandstorm.myplane.R;
+import com.hurteng.sandstorm.object.EnemyBullet;
+import com.hurteng.sandstorm.object.GameObject;
 
 import java.util.Random;
 
@@ -34,8 +36,7 @@ public class BossBullet4 extends EnemyBullet {
 	// 初始化图片的资源
 	@Override
 	public void initBitmap() {
-		// TODO Auto-generated method stub
-		bullet = BitmapFactory.decodeResource(resources, R.drawable.bossbullet4);
+		bullet = BitmapFactory.decodeResource(resources, R.drawable.boss_bullet_hellfire_yellow);
 		object_width = bullet.getWidth();
 		object_height = bullet.getHeight();
 	}
@@ -43,7 +44,6 @@ public class BossBullet4 extends EnemyBullet {
 	// 对象的绘图方法
 	@Override
 	public void drawSelf(Canvas canvas) {
-		// TODO Auto-generated method stub
 		if (isAlive) {
 			canvas.save();
 			canvas.clipRect(object_x, object_y, object_x + object_width,
@@ -57,7 +57,6 @@ public class BossBullet4 extends EnemyBullet {
 	// 释放资源的方法
 	@Override
 	public void release() {
-		// TODO Auto-generated method stub
 		if (!bullet.isRecycled()) {
 			bullet.recycle();
 		}
@@ -77,7 +76,6 @@ public class BossBullet4 extends EnemyBullet {
 
 	@Override
 	public boolean isCollide(GameObject obj) {
-		// TODO Auto-generated method stub
 		return super.isCollide(obj);
 	}
 

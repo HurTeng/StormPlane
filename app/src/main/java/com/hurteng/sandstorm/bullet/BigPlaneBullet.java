@@ -1,4 +1,4 @@
-package com.hurteng.sandstorm.object;
+package com.hurteng.sandstorm.bullet;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -6,17 +6,17 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
 import com.hurteng.sandstorm.myplane.R;
-
-import java.util.Random;
+import com.hurteng.sandstorm.object.EnemyBullet;
+import com.hurteng.sandstorm.object.GameObject;
 
 /**
- * BOSS子弹5
+ * 大型机子弹
  */
-public class BossBullet5 extends EnemyBullet {
+public class BigPlaneBullet extends EnemyBullet {
 
 	private Bitmap bullet;
 
-	public BossBullet5(Resources resources) {
+	public BigPlaneBullet(Resources resources) {
 		super(resources);
 	}
 
@@ -24,18 +24,15 @@ public class BossBullet5 extends EnemyBullet {
 	@Override
 	public void initial(int arg0, float arg1, float arg2) {
 		isAlive = true;
-		Random random = new Random();
-		speed = random.nextInt(10) + 5;
+		speed = 50;
 		object_x = arg1 - object_width / 2;
-		object_y = arg1 + 2*object_height;
-		
+		object_y = arg2 - object_height;
 	}
 
-	// 初始化图片资源的
+	// 初始化图片的资源
 	@Override
 	public void initBitmap() {
-		// TODO Auto-generated method stub
-		bullet = BitmapFactory.decodeResource(resources, R.drawable.bossbullet5);
+		bullet = BitmapFactory.decodeResource(resources, R.drawable.bigplane_bullet);
 		object_width = bullet.getWidth();
 		object_height = bullet.getHeight();
 	}
@@ -43,7 +40,6 @@ public class BossBullet5 extends EnemyBullet {
 	// 对象的绘图方法
 	@Override
 	public void drawSelf(Canvas canvas) {
-		// TODO Auto-generated method stub
 		if (isAlive) {
 			canvas.save();
 			canvas.clipRect(object_x, object_y, object_x + object_width,
@@ -57,7 +53,6 @@ public class BossBullet5 extends EnemyBullet {
 	// 释放资源的方法
 	@Override
 	public void release() {
-		// TODO Auto-generated method stub
 		if (!bullet.isRecycled()) {
 			bullet.recycle();
 		}
@@ -66,9 +61,9 @@ public class BossBullet5 extends EnemyBullet {
 	// 对象的逻辑函数
 	@Override
 	public void logic() {
-		if (object_y >= 0) {
-			object_y -= speed;
-			object_x += 8*(Math.tan(object_y));
+		if (object_y <= screen_height) {
+			object_y += speed;
+			object_x += 30*Math.sin(System.currentTimeMillis()/1000);
 		} else {
 			isAlive = false;
 		}
@@ -76,7 +71,6 @@ public class BossBullet5 extends EnemyBullet {
 
 	@Override
 	public boolean isCollide(GameObject obj) {
-		// TODO Auto-generated method stub
 		return super.isCollide(obj);
 	}
 

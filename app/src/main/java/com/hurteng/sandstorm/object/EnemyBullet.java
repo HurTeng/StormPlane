@@ -3,6 +3,8 @@ package com.hurteng.sandstorm.object;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 
+import com.hurteng.sandstorm.bullet.Bullet;
+
 /**
  * 敌方子弹类
  * 

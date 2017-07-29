@@ -1,81 +1,84 @@
-package com.hurteng.sandstorm.object;
+package com.hurteng.sandstorm.bullet;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
+import com.hurteng.sandstorm.constant.GameConstant;
 import com.hurteng.sandstorm.myplane.R;
-
-import java.util.Random;
+import com.hurteng.sandstorm.object.GameObject;
 
 /**
- * BOSS子弹2
+ * 玩家飞机的子弹类2
  */
-public class BossBullet2 extends EnemyBullet {
-
-	private Bitmap bullet;
-
-	public BossBullet2(Resources resources) {
+public class MyBullet2 extends Bullet {
+	private Bitmap bullet; 		 // 子弹的图片
+	private boolean attack;		//标记子弹是否击中
+	
+	public MyBullet2(Resources resources) {
 		super(resources);
+		this.harm = GameConstant.MYBULLET2_HARM;
 	}
-
 	// 初始化数据
 	@Override
-	public void initial(int arg0, float arg1, float arg2) {
+	public void initial(int arg0,float arg1,float arg2){
 		isAlive = true;
-		Random random = new Random();
-		speed = random.nextInt(5) + 10;
-		object_x = arg1 - object_width / 2;
-		object_y = arg1 + 2*object_height;
-		
-	}
 
+		speed = GameConstant.MYBULLET2_SPEED;	
+		object_x = arg1 - object_width / 2;
+		object_y = arg2 - object_height;
+
+	}
 	// 初始化图片资源的
 	@Override
 	public void initBitmap() {
-		bullet = BitmapFactory.decodeResource(resources, R.drawable.bossbullet2);
+		bullet = BitmapFactory.decodeResource(resources, R.drawable.bullet2);
 		object_width = bullet.getWidth();
 		object_height = bullet.getHeight();
 	}
-
 	// 对象的绘图方法
 	@Override
 	public void drawSelf(Canvas canvas) {
 		if (isAlive) {
 			canvas.save();
-			canvas.clipRect(object_x, object_y, object_x + object_width,
-					object_y + object_height);
+			canvas.clipRect(object_x, object_y, object_x + object_width,object_y + object_height);
 			canvas.drawBitmap(bullet, object_x, object_y, paint);
 			canvas.restore();
-			logic();
 		}
-	}
 
+		logic();
+	}
 	// 释放资源的方法
 	@Override
 	public void release() {
-		if (!bullet.isRecycled()) {
+		if(!bullet.isRecycled()){
 			bullet.recycle();
 		}
 	}
-
 	// 对象的逻辑函数
 	@Override
 	public void logic() {
 		if (object_y >= 0) {
 			object_y -= speed;
-//			object_x += 3*(Math.tan(object_y));
-			object_x += 3*(Math.tan(System.currentTimeMillis()));
-//			object_x += 30*Math.sin(System.currentTimeMillis()/1000);
-		} else {
+			object_x += 100*(Math.sin(System.currentTimeMillis()));
+		}
+		else {
 			isAlive = false;
 		}
-	}
 
+	}
+	// 检测碰撞的方法
 	@Override
 	public boolean isCollide(GameObject obj) {
 		return super.isCollide(obj);
 	}
-
+	
+	//判断子弹是否存在
+	@Override
+	public boolean isAlive() {
+		return isAlive;
+	}
+	
 }
+

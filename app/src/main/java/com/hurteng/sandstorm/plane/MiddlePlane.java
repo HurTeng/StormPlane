@@ -1,4 +1,4 @@
-package com.hurteng.sandstorm.object;
+package com.hurteng.sandstorm.plane;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -49,7 +49,6 @@ public class MiddlePlane extends EnemyPlane {
 
     @Override
     public void drawSelf(Canvas canvas) {
-        // TODO Auto-generated method stub
         if (isAlive) {
             if (!isExplosion) {
                 if (isVisible) {
