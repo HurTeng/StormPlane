@@ -10,13 +10,13 @@ import com.hurteng.sandstorm.myplane.R;
 import com.hurteng.sandstorm.object.GameObject;
 
 /**
- * 玩家飞机的子弹类2
+ * 我方机体的红色追踪战斧冲击波
  */
-public class MyBulletRed extends Bullet {
+public class MyRedBullet extends Bullet {
 	private Bitmap bullet; 		 // 子弹的图片
 	private boolean attack;		//标记子弹是否击中
 	
-	public MyBulletRed(Resources resources) {
+	public MyRedBullet(Resources resources) {
 		super(resources);
 		this.harm = GameConstant.MYBULLET2_HARM;
 	}

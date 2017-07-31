@@ -4,23 +4,23 @@ import android.content.res.Resources;
 
 import com.hurteng.sandstorm.plane.BigPlane;
 import com.hurteng.sandstorm.bullet.BigPlaneBullet;
-import com.hurteng.sandstorm.bullet.BossBullet;
-import com.hurteng.sandstorm.bullet.BossBullet1;
-import com.hurteng.sandstorm.bullet.BossBullet2;
-import com.hurteng.sandstorm.bullet.BossBullet3;
-import com.hurteng.sandstorm.bullet.BossBullet4;
-import com.hurteng.sandstorm.bullet.BossBullet5;
-import com.hurteng.sandstorm.bullet.BossBulletDefault;
+import com.hurteng.sandstorm.bullet.BossFlameBullet;
+import com.hurteng.sandstorm.bullet.BossSunBullet;
+import com.hurteng.sandstorm.bullet.BossTriangleBullet;
+import com.hurteng.sandstorm.bullet.BossGThunderBullet;
+import com.hurteng.sandstorm.bullet.BossYHellfireBullet;
+import com.hurteng.sandstorm.bullet.BossRHellfireBullet;
+import com.hurteng.sandstorm.bullet.BossDefaultBullet;
 import com.hurteng.sandstorm.plane.BossPlane;
-import com.hurteng.sandstorm.object.BulletGoods1;
-import com.hurteng.sandstorm.object.BulletGoods2;
+import com.hurteng.sandstorm.object.PurpleBulletGoods;
+import com.hurteng.sandstorm.object.RedBulletGoods;
 import com.hurteng.sandstorm.object.GameObject;
 import com.hurteng.sandstorm.object.LifeGoods;
 import com.hurteng.sandstorm.plane.MiddlePlane;
 import com.hurteng.sandstorm.object.MissileGoods;
-import com.hurteng.sandstorm.bullet.MyBulletBlue;
-import com.hurteng.sandstorm.bullet.MyBulletPurple;
-import com.hurteng.sandstorm.bullet.MyBulletRed;
+import com.hurteng.sandstorm.bullet.MyBlueBullet;
+import com.hurteng.sandstorm.bullet.MyPurpleBullet;
+import com.hurteng.sandstorm.bullet.MyRedBullet;
 import com.hurteng.sandstorm.plane.MyPlane;
 import com.hurteng.sandstorm.plane.SmallPlane;
 
@@ -65,58 +65,68 @@ public class GameObjectFactory {
         return new BossPlane(resources);
     }
 
-    // 我方机体
+    /**
+     * 生产我方机体
+     * @param resources
+     * @return
+     */
     public GameObject createMyPlane(Resources resources) {
         return new MyPlane(resources);
     }
 
-    // 我方子弹
-    public GameObject createMyBullet(Resources resources) {
-        return new MyBulletBlue(resources);
+    /**
+     * 生产我方的子弹
+     * @param resources
+     * @return
+     */
+    public GameObject createMyBlueBullet(Resources resources) {
+        return new MyBlueBullet(resources);
     }
-    public GameObject createMyBullet1(Resources resources) {
-        return new MyBulletPurple(resources);
+    public GameObject createMyPurpleBullet(Resources resources) {
+        return new MyPurpleBullet(resources);
     }
-    public GameObject createMyBullet2(Resources resources) {
-        return new MyBulletRed(resources);
-    }
-
-    //Boss子弹
-    public GameObject createBossBullet(Resources resources) {
-        return new BossBullet(resources);
-    }
-
-    //Boss子弹1
-    public GameObject createBossBullet1(Resources resources) {
-        return new BossBullet1(resources);
+    public GameObject createMyRedBullet(Resources resources) {
+        return new MyRedBullet(resources);
     }
 
-    //Boss子弹2
-    public GameObject createBossBullet2(Resources resources) {
-        return new BossBullet2(resources);
+    /**
+     * 生产BOSS的子弹
+     * @param resources
+     * @return
+     */
+    public GameObject createBossFlameBullet(Resources resources) {
+        return new BossFlameBullet(resources);
     }
 
-    //Boss子弹3
-    public GameObject createBossBullet3(Resources resources) {
-        return new BossBullet3(resources);
+    public GameObject createBossSunBullet(Resources resources) {
+        return new BossSunBullet(resources);
     }
 
-    //Boss子弹4
-    public GameObject createBossBullet4(Resources resources) {
-        return new BossBullet4(resources);
+    public GameObject createBossTriangleBullet(Resources resources) {
+        return new BossTriangleBullet(resources);
     }
 
-    //Boss子弹5
-    public GameObject createBossBullet5(Resources resources) {
-        return new BossBullet5(resources);
+    public GameObject createBossGThunderBullet(Resources resources) {
+        return new BossGThunderBullet(resources);
     }
 
-    //Boss子弹Default
+    public GameObject createBossYHellfireBullet(Resources resources) {
+        return new BossYHellfireBullet(resources);
+    }
+
+    public GameObject createBossRHellfireBullet(Resources resources) {
+        return new BossRHellfireBullet(resources);
+    }
+
     public GameObject createBossBulletDefault(Resources resources) {
-        return new BossBulletDefault(resources);
+        return new BossDefaultBullet(resources);
     }
 
-    // BigPlane子弹
+    /**
+     * 生产BigPlane的子弹
+     * @param resources
+     * @return
+     */
     public GameObject createBigPlaneBullet(Resources resources) {
         return new BigPlaneBullet(resources);
     }
@@ -140,12 +150,16 @@ public class GameObjectFactory {
     }
 
 
-    // 生产子弹物品
-    public GameObject createBulletGoods1(Resources resources) {
-        return new BulletGoods1(resources);
+    /**
+     * 生产子弹物品
+     * @param resources
+     * @return
+     */
+    public GameObject createPurpleBulletGoods(Resources resources) {
+        return new PurpleBulletGoods(resources);
     }
 
-    public GameObject createBulletGoods2(Resources resources) {
-        return new BulletGoods2(resources);
+    public GameObject createRedBulletGoods(Resources resources) {
+        return new RedBulletGoods(resources);
     }
 }

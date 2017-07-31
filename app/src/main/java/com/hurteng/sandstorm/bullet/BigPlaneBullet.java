@@ -9,7 +9,7 @@ import com.hurteng.sandstorm.myplane.R;
 import com.hurteng.sandstorm.object.GameObject;
 
 /**
- * 大型机子弹
+ * 大型机的烈焰飘雪弹
  */
 public class BigPlaneBullet extends EnemyBullet {
 

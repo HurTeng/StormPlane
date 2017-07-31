@@ -5,13 +5,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
-import com.hurteng.sandstorm.bullet.BossBullet;
-import com.hurteng.sandstorm.bullet.BossBullet1;
-import com.hurteng.sandstorm.bullet.BossBullet2;
-import com.hurteng.sandstorm.bullet.BossBullet3;
-import com.hurteng.sandstorm.bullet.BossBullet4;
-import com.hurteng.sandstorm.bullet.BossBullet5;
-import com.hurteng.sandstorm.bullet.BossBulletDefault;
+import com.hurteng.sandstorm.bullet.BossFlameBullet;
+import com.hurteng.sandstorm.bullet.BossSunBullet;
+import com.hurteng.sandstorm.bullet.BossTriangleBullet;
+import com.hurteng.sandstorm.bullet.BossGThunderBullet;
+import com.hurteng.sandstorm.bullet.BossYHellfireBullet;
+import com.hurteng.sandstorm.bullet.BossRHellfireBullet;
+import com.hurteng.sandstorm.bullet.BossDefaultBullet;
 import com.hurteng.sandstorm.bullet.Bullet;
 import com.hurteng.sandstorm.constant.ConstantUtil;
 import com.hurteng.sandstorm.constant.GameConstant;
@@ -443,30 +443,30 @@ public class BossPlane extends EnemyPlane {
         if (bulletType == ConstantUtil.BOSSBULLET_DEFAULT) {
             for (int i = 0; i < 100; i++) {
                 // 生产子弹Default
-                BossBulletDefault bullet_default = (BossBulletDefault) factory
+                BossDefaultBullet bullet_default = (BossDefaultBullet) factory
                         .createBossBulletDefault(resources);
                 bullets.add(bullet_default);
 
                 if (speedTime >= 3) {
                     if (speedTime == 3) {
                         // 生产子弹4
-                        BossBullet4 bullet4 = (BossBullet4) factory
-                                .createBossBullet4(resources);
+                        BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
+                                .createBossYHellfireBullet(resources);
                         bullets.add(bullet4);
                     } else if (speedTime == 4) {
                         // 生产子弹5
-                        BossBullet5 bullet5 = (BossBullet5) factory
-                                .createBossBullet5(resources);
+                        BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
+                                .createBossRHellfireBullet(resources);
                         bullets.add(bullet5);
                     } else {
                         // 生产子弹4
-                        BossBullet4 bullet4 = (BossBullet4) factory
-                                .createBossBullet4(resources);
+                        BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
+                                .createBossYHellfireBullet(resources);
                         bullets.add(bullet4);
 
                         // 生产子弹5
-                        BossBullet5 bullet5 = (BossBullet5) factory
-                                .createBossBullet5(resources);
+                        BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
+                                .createBossRHellfireBullet(resources);
                         bullets.add(bullet5);
                     }
                 }
@@ -479,38 +479,38 @@ public class BossPlane extends EnemyPlane {
             for (int i = 0; i < 8; i++) {
                 if (speedTime <= 2) {
                     // 生产子弹1
-                    BossBullet1 bullet1 = (BossBullet1) factory
-                            .createBossBullet1(resources);
+                    BossSunBullet bullet1 = (BossSunBullet) factory
+                            .createBossSunBullet(resources);
                     bullets.add(bullet1);
 
                     // 生产子弹2
-                    BossBullet2 bullet2 = (BossBullet2) factory
-                            .createBossBullet2(resources);
+                    BossTriangleBullet bullet2 = (BossTriangleBullet) factory
+                            .createBossTriangleBullet(resources);
                     bullets.add(bullet2);
                 } else if (speedTime <= 4) {
                     // 生产子弹1
-                    BossBullet1 bullet1 = (BossBullet1) factory
-                            .createBossBullet1(resources);
+                    BossSunBullet bullet1 = (BossSunBullet) factory
+                            .createBossSunBullet(resources);
                     bullets.add(bullet1);
 
                     // 生产子弹3
-                    BossBullet3 bullet3 = (BossBullet3) factory
-                            .createBossBullet3(resources);
+                    BossGThunderBullet bullet3 = (BossGThunderBullet) factory
+                            .createBossGThunderBullet(resources);
                     bullets.add(bullet3);
                 } else {
                     // 生产子弹1
-                    BossBullet1 bullet1 = (BossBullet1) factory
-                            .createBossBullet1(resources);
+                    BossSunBullet bullet1 = (BossSunBullet) factory
+                            .createBossSunBullet(resources);
                     bullets.add(bullet1);
 
                     // 生产子弹2
-                    BossBullet2 bullet2 = (BossBullet2) factory
-                            .createBossBullet2(resources);
+                    BossTriangleBullet bullet2 = (BossTriangleBullet) factory
+                            .createBossTriangleBullet(resources);
                     bullets.add(bullet2);
 
                     // 生产子弹3
-                    BossBullet3 bullet3 = (BossBullet3) factory
-                            .createBossBullet3(resources);
+                    BossGThunderBullet bullet3 = (BossGThunderBullet) factory
+                            .createBossGThunderBullet(resources);
                     bullets.add(bullet3);
                 }
 
@@ -524,37 +524,37 @@ public class BossPlane extends EnemyPlane {
             for (int i = 0; i < clip; i++) {
                 if (speedTime == 1) {
                     // 生产子弹4
-                    BossBullet4 bullet4 = (BossBullet4) factory
-                            .createBossBullet4(resources);
+                    BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
+                            .createBossYHellfireBullet(resources);
                     bullets.add(bullet4);
                 } else if (speedTime == 2) {
                     // 生产子弹5
-                    BossBullet5 bullet5 = (BossBullet5) factory
-                            .createBossBullet5(resources);
+                    BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
+                            .createBossRHellfireBullet(resources);
                     bullets.add(bullet5);
                 } else if (speedTime == 3) {
                     // 生产子弹4
-                    BossBullet4 bullet4 = (BossBullet4) factory
-                            .createBossBullet4(resources);
+                    BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
+                            .createBossYHellfireBullet(resources);
                     bullets.add(bullet4);
                     // 生产子弹5
-                    BossBullet5 bullet5 = (BossBullet5) factory
-                            .createBossBullet5(resources);
+                    BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
+                            .createBossRHellfireBullet(resources);
                     bullets.add(bullet5);
                 } else {
                     // 生产子弹3
-                    BossBullet3 bullet3 = (BossBullet3) factory
-                            .createBossBullet3(resources);
+                    BossGThunderBullet bullet3 = (BossGThunderBullet) factory
+                            .createBossGThunderBullet(resources);
                     bullets.add(bullet3);
 
                     // 生产子弹4
-                    BossBullet4 bullet4 = (BossBullet4) factory
-                            .createBossBullet4(resources);
+                    BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
+                            .createBossYHellfireBullet(resources);
                     bullets.add(bullet4);
 
                     // 生产子弹5
-                    BossBullet5 bullet5 = (BossBullet5) factory
-                            .createBossBullet5(resources);
+                    BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
+                            .createBossRHellfireBullet(resources);
                     bullets.add(bullet5);
 
                 }
@@ -570,61 +570,61 @@ public class BossPlane extends EnemyPlane {
             for (int i = 0; i < clip; i++) {
                 if (speedTime == 1) {
                     // 生产子弹5
-                    BossBullet5 bullet5 = (BossBullet5) factory
-                            .createBossBullet5(resources);
+                    BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
+                            .createBossRHellfireBullet(resources);
                     bullets.add(bullet5);
                 } else if (speedTime == 2) {
                     // 生产子弹4
-                    BossBullet4 bullet4 = (BossBullet4) factory
-                            .createBossBullet4(resources);
+                    BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
+                            .createBossYHellfireBullet(resources);
                     bullets.add(bullet4);
 
                     // 生产子弹5
-                    BossBullet5 bullet5 = (BossBullet5) factory
-                            .createBossBullet5(resources);
+                    BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
+                            .createBossRHellfireBullet(resources);
                     bullets.add(bullet5);
                 } else if (speedTime == 3) {
                     // 生产子弹1
-                    BossBullet1 bullet1 = (BossBullet1) factory
-                            .createBossBullet1(resources);
+                    BossSunBullet bullet1 = (BossSunBullet) factory
+                            .createBossSunBullet(resources);
                     bullets.add(bullet1);
                     // 生产子弹4
-                    BossBullet4 bullet4 = (BossBullet4) factory
-                            .createBossBullet4(resources);
+                    BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
+                            .createBossYHellfireBullet(resources);
                     bullets.add(bullet4);
                     // 生产子弹5
-                    BossBullet5 bullet5 = (BossBullet5) factory
-                            .createBossBullet5(resources);
+                    BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
+                            .createBossRHellfireBullet(resources);
                     bullets.add(bullet5);
                 } else if (speedTime == 4) {
                     // 生产子弹1
-                    BossBullet1 bullet1 = (BossBullet1) factory
-                            .createBossBullet1(resources);
+                    BossSunBullet bullet1 = (BossSunBullet) factory
+                            .createBossSunBullet(resources);
                     bullets.add(bullet1);
 
                     // 生产子弹3
-                    BossBullet3 bullet3 = (BossBullet3) factory
-                            .createBossBullet3(resources);
+                    BossGThunderBullet bullet3 = (BossGThunderBullet) factory
+                            .createBossGThunderBullet(resources);
                     bullets.add(bullet3);
 
                     // 生产子弹5
-                    BossBullet5 bullet5 = (BossBullet5) factory
-                            .createBossBullet5(resources);
+                    BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
+                            .createBossRHellfireBullet(resources);
                     bullets.add(bullet5);
                 } else {
 
                     // 生产子弹1
-                    BossBullet1 bullet1 = (BossBullet1) factory
-                            .createBossBullet1(resources);
+                    BossSunBullet bullet1 = (BossSunBullet) factory
+                            .createBossSunBullet(resources);
                     bullets.add(bullet1);
 
                     // 生产子弹5
-                    BossBullet5 bullet5 = (BossBullet5) factory
-                            .createBossBullet5(resources);
+                    BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
+                            .createBossRHellfireBullet(resources);
                     bullets.add(bullet5);
 
                     // 生产子弹Default
-                    BossBulletDefault bullet_default = (BossBulletDefault) factory
+                    BossDefaultBullet bullet_default = (BossDefaultBullet) factory
                             .createBossBulletDefault(resources);
                     bullets.add(bullet_default);
 
@@ -635,8 +635,8 @@ public class BossPlane extends EnemyPlane {
         } else {
             for (int i = 0; i < 5; i++) {
                 // 生产普通子弹
-                BossBullet bullet = (BossBullet) factory
-                        .createBossBullet(resources);
+                BossFlameBullet bullet = (BossFlameBullet) factory
+                        .createBossFlameBullet(resources);
                 bullets.add(bullet);
 
             }

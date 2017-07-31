@@ -11,9 +11,9 @@ import com.hurteng.sandstorm.object.GameObject;
 import com.hurteng.sandstorm.plane.SmallPlane;
 
 /**
- * 我方机体子弹1
+ * 我方机体的紫色双螺旋粒子炮
  */
-public class MyBulletPurple extends Bullet {
+public class MyPurpleBullet extends Bullet {
     private Bitmap bullet;
     private float object_x2;
     private float object_y2;
@@ -21,7 +21,7 @@ public class MyBulletPurple extends Bullet {
     private boolean attack;            // 命中状态
     private boolean attack2;
 
-    public MyBulletPurple(Resources resources) {
+    public MyPurpleBullet(Resources resources) {
         super(resources);
         this.harm = GameConstant.MYBULLET1_HARM;
     }

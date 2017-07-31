@@ -1,4 +1,4 @@
-package com.hurteng.sandstorm.myplane;
+package com.hurteng.sandstorm;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

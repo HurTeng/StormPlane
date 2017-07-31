@@ -6,7 +6,7 @@ import android.graphics.Paint;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.hurteng.sandstorm.myplane.MainActivity;
+import com.hurteng.sandstorm.MainActivity;
 import com.hurteng.sandstorm.sounds.GameSoundPool;
 
 @SuppressLint("ViewConstructor")

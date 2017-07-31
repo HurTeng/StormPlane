@@ -7,18 +7,46 @@ import com.hurteng.sandstorm.plane.EnemyPlane;
 
 import java.util.List;
 
+/**
+ * 我方战机的接口类
+ */
 public interface IMyPlane {
-    public float getMiddle_x();
 
-    public void setMiddle_x(float middle_x);
+    /**
+     * 获取中间点的x坐标
+     * @return
+     */
+    float getMiddle_x();
 
-    public float getMiddle_y();
+    /**
+     * 设置中间点的x坐标
+     * @param middle_x
+     */
+    void setMiddle_x(float middle_x);
 
-    public void setMiddle_y(float middle_y);
+    /**
+     * 获取中间点的y坐标
+     * @return
+     */
+    float getMiddle_y();
 
-    public boolean isChangeBullet();
+    /**
+     * 设置中间点的y坐标
+     * @param middle_y
+     */
+    void setMiddle_y(float middle_y);
 
-    public void setChangeBullet(boolean isChangeBullet);
+    /**
+     * 判断子弹是否改变状态
+     * @return
+     */
+    boolean isChangeBullet();
+
+    /**
+     * 设置是否改变子弹类型
+     * @param isChangeBullet
+     */
+    void setChangeBullet(boolean isChangeBullet);
 
     /**
      * 射击
@@ -26,17 +54,17 @@ public interface IMyPlane {
      * @param canvas
      * @param planes
      */
-    public void shoot(Canvas canvas, List<EnemyPlane> planes);
+    void shoot(Canvas canvas, List<EnemyPlane> planes);
 
     /**
      * 初始化子弹
      */
-    public void initBullet();
+    void initBullet();
 
     /**
      * 改变子弹类型
      *
      * @param type
      */
-    public void changeBullet(int type);
+    void changeBullet(int type);
 }

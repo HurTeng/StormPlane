@@ -10,7 +10,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 
 import com.hurteng.sandstorm.constant.ConstantUtil;
-import com.hurteng.sandstorm.myplane.MainActivity;
+import com.hurteng.sandstorm.MainActivity;
 import com.hurteng.sandstorm.myplane.R;
 import com.hurteng.sandstorm.sounds.GameSoundPool;
 

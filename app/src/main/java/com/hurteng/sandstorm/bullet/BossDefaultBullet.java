@@ -13,7 +13,7 @@ import com.hurteng.sandstorm.plane.SmallPlane;
 /**
  * Boss默认的子弹
  */
-public class BossBulletDefault extends EnemyBullet {
+public class BossDefaultBullet extends EnemyBullet {
 
 	private Bitmap bullet;
 	private boolean isAlive2;
@@ -22,7 +22,7 @@ public class BossBulletDefault extends EnemyBullet {
 	private boolean attack;
 	private boolean attack2;
 
-	public BossBulletDefault(Resources resources) {
+	public BossDefaultBullet(Resources resources) {
 		super(resources);
 	}
 

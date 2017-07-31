@@ -6,17 +6,17 @@ import android.graphics.BitmapFactory;
 import com.hurteng.sandstorm.myplane.R;
 
 /**
- * 子弹物品1
+ * 红色弹药物品
  */
-public class BulletGoods1 extends GameGoods{
-	public BulletGoods1(Resources resources) {
+public class RedBulletGoods extends GameGoods {
+
+	public RedBulletGoods(Resources resources) {
 		super(resources);
 	}
-	@Override
+
 	protected void initBitmap() {
-		bmp = BitmapFactory.decodeResource(resources, R.drawable.bullet_goods1);
+		bmp = BitmapFactory.decodeResource(resources, R.drawable.bullet_goods2);
 		object_width = bmp.getWidth();			
 		object_height = bmp.getHeight();	
 	}
 }
-

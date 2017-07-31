@@ -5,41 +5,51 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
-import com.hurteng.sandstorm.constant.GameConstant;
 import com.hurteng.sandstorm.myplane.R;
 import com.hurteng.sandstorm.object.GameObject;
 
-/**
- * 我方机体的默认子弹
- */
-public class MyBulletBlue extends Bullet {
-    private Bitmap bullet;         // 子弹图片
+import java.util.Random;
 
-    public MyBulletBlue(Resources resources) {
+
+/**
+ * BOSS的火焰弹
+ */
+public class BossFlameBullet extends EnemyBullet {
+    private Bitmap bullet;
+
+    public BossFlameBullet(Resources resources) {
         super(resources);
-        this.harm = GameConstant.MYBULLET_HARM;
     }
 
     @Override
     public void initial(int arg0, float arg1, float arg2) {
         isAlive = true;
-        speed = GameConstant.MYBULLET_SPEED;
+        Random random = new Random();
+        speed = random.nextInt(20) + 20;
         object_x = arg1 - object_width / 2;
         object_y = arg2 - object_height;
+
+        //obj.initial(0, object_x + object_width / 2,object_height);
     }
 
     @Override
     public void initBitmap() {
-        bullet = BitmapFactory.decodeResource(resources, R.drawable.my_bullet_blue);
+        bullet = BitmapFactory.decodeResource(resources, R.drawable.boss_bullet_default);
         object_width = bullet.getWidth();
         object_height = bullet.getHeight();
     }
 
+
+    /**
+     * 绘制子弹
+     * @param canvas
+     */
     @Override
     public void drawSelf(Canvas canvas) {
         if (isAlive) {
             canvas.save();
-            canvas.clipRect(object_x, object_y, object_x + object_width, object_y + object_height);
+            canvas.clipRect(object_x, object_y, object_x + object_width,
+                    object_y + object_height);
             canvas.drawBitmap(bullet, object_x, object_y, paint);
             canvas.restore();
             logic();
@@ -58,13 +68,15 @@ public class MyBulletBlue extends Bullet {
      */
     @Override
     public void logic() {
-        if (object_y >= 0) {
-            object_y -= speed;
+        if (object_y <= screen_height) {
+            object_y += speed;
+//			object_x += 100*(Math.tan(object_y) + 0.4);
         } else {
             isAlive = false;
         }
     }
 
+    // 碰撞检测
     @Override
     public boolean isCollide(GameObject obj) {
         return super.isCollide(obj);

@@ -1,8 +1,5 @@
 package com.hurteng.sandstorm.view;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -18,18 +15,21 @@ import com.hurteng.sandstorm.constant.DebugConstant;
 import com.hurteng.sandstorm.constant.GameConstant;
 import com.hurteng.sandstorm.factory.GameObjectFactory;
 import com.hurteng.sandstorm.myplane.R;
-import com.hurteng.sandstorm.plane.BigPlane;
-import com.hurteng.sandstorm.plane.BossPlane;
-import com.hurteng.sandstorm.object.BulletGoods1;
-import com.hurteng.sandstorm.object.BulletGoods2;
-import com.hurteng.sandstorm.plane.EnemyPlane;
+import com.hurteng.sandstorm.object.RedBulletGoods;
 import com.hurteng.sandstorm.object.GameObject;
 import com.hurteng.sandstorm.object.LifeGoods;
-import com.hurteng.sandstorm.plane.MiddlePlane;
 import com.hurteng.sandstorm.object.MissileGoods;
+import com.hurteng.sandstorm.object.PurpleBulletGoods;
+import com.hurteng.sandstorm.plane.BigPlane;
+import com.hurteng.sandstorm.plane.BossPlane;
+import com.hurteng.sandstorm.plane.EnemyPlane;
+import com.hurteng.sandstorm.plane.MiddlePlane;
 import com.hurteng.sandstorm.plane.MyPlane;
 import com.hurteng.sandstorm.plane.SmallPlane;
 import com.hurteng.sandstorm.sounds.GameSoundPool;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 游戏进行的主界面
@@ -67,8 +67,8 @@ public class MainView extends BaseView {
 	private List<EnemyPlane> enemyPlanes;
 	private MissileGoods missileGoods;
 	private LifeGoods lifeGoods; // 生命物品
-	private BulletGoods1 bulletGoods1;
-	private BulletGoods2 bulletGoods2; // 子弹2
+	private PurpleBulletGoods purpleBulletGoods;
+	private RedBulletGoods redBulletGoods; // 子弹2
 
 	private int mLifeAmount;// 生命总数
 	private GameObjectFactory factory;
@@ -129,10 +129,10 @@ public class MainView extends BaseView {
 		// 生产生命物品
 		lifeGoods = (LifeGoods) factory.createLifeGoods(getResources());
 		// 生产子弹物品
-		bulletGoods1 = (BulletGoods1) factory
-				.createBulletGoods1(getResources());
-		bulletGoods2 = (BulletGoods2) factory
-				.createBulletGoods2(getResources());
+		purpleBulletGoods = (PurpleBulletGoods) factory
+				.createPurpleBulletGoods(getResources());
+		redBulletGoods = (RedBulletGoods) factory
+				.createRedBulletGoods(getResources());
 		thread = new Thread(this);
 	}
 
@@ -153,8 +153,8 @@ public class MainView extends BaseView {
 		missileGoods.setScreenWH(screen_width, screen_height);
 		lifeGoods.setScreenWH(screen_width, screen_height);
 
-		bulletGoods1.setScreenWH(screen_width, screen_height);
-		bulletGoods2.setScreenWH(screen_width, screen_height);
+		purpleBulletGoods.setScreenWH(screen_width, screen_height);
+		redBulletGoods.setScreenWH(screen_width, screen_height);
 
 		myPlane.setScreenWH(screen_width, screen_height);
 		myPlane.setAlive(true);
@@ -366,19 +366,19 @@ public class MainView extends BaseView {
 		}
 		// 初始化子弹1物品
 		if (bulletScore >= GameConstant.BULLET1_APPEARSCORE) {
-			if (!bulletGoods1.isAlive()) {
+			if (!purpleBulletGoods.isAlive()) {
 				bulletScore = 0;
 				if (DebugConstant.BULLETGOODS1_APPEAR) {
-					bulletGoods1.initial(0, 0, 0);
+					purpleBulletGoods.initial(0, 0, 0);
 				}
 			}
 		}
 		// 初始化子弹2物品
 		if (bulletScore2 >= GameConstant.BULLET2_APPEARSCORE) {
-			if (!bulletGoods2.isAlive()) {
+			if (!redBulletGoods.isAlive()) {
 				bulletScore2 = 0;
 				if (DebugConstant.BULLETGOODS2_APPEAR) {
-					bulletGoods2.initial(0, 0, 0);
+					redBulletGoods.initial(0, 0, 0);
 				}
 			}
 		}
@@ -417,8 +417,8 @@ public class MainView extends BaseView {
 		myPlane.release();
 		missileGoods.release();
 		lifeGoods.release();
-		bulletGoods1.release();
-		bulletGoods2.release();
+		purpleBulletGoods.release();
+		redBulletGoods.release();
 
 		if (!playButton.isRecycled()) {
 			playButton.recycle();
@@ -533,9 +533,9 @@ public class MainView extends BaseView {
 					lifeGoods.drawSelf(canvas);
 			}
 			// 绘制子弹物品
-			if (bulletGoods1.isAlive()) {
-				if (bulletGoods1.isCollide(myPlane)) {
-					bulletGoods1.setAlive(false);
+			if (purpleBulletGoods.isAlive()) {
+				if (purpleBulletGoods.isCollide(myPlane)) {
+					purpleBulletGoods.setAlive(false);
 					sounds.playSound(6, 0);
 
 					myPlane.setChangeBullet(true);
@@ -543,12 +543,12 @@ public class MainView extends BaseView {
 					myPlane.setStartTime(System.currentTimeMillis());
 
 				} else
-					bulletGoods1.drawSelf(canvas);
+					purpleBulletGoods.drawSelf(canvas);
 			}
 			// 绘制子弹2物品
-			if (bulletGoods2.isAlive()) {
-				if (bulletGoods2.isCollide(myPlane)) {
-					bulletGoods2.setAlive(false);
+			if (redBulletGoods.isAlive()) {
+				if (redBulletGoods.isCollide(myPlane)) {
+					redBulletGoods.setAlive(false);
 					sounds.playSound(6, 0);
 
 					myPlane.setChangeBullet(true);
@@ -556,7 +556,7 @@ public class MainView extends BaseView {
 					myPlane.setStartTime(System.currentTimeMillis());
 
 				} else
-					bulletGoods2.drawSelf(canvas);
+					redBulletGoods.drawSelf(canvas);
 			}
 
 			// 绘制敌机

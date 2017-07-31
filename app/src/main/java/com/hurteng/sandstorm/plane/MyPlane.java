@@ -7,9 +7,9 @@ import android.graphics.Canvas;
 import android.os.SystemClock;
 
 import com.hurteng.sandstorm.bullet.Bullet;
-import com.hurteng.sandstorm.bullet.MyBulletBlue;
-import com.hurteng.sandstorm.bullet.MyBulletPurple;
-import com.hurteng.sandstorm.bullet.MyBulletRed;
+import com.hurteng.sandstorm.bullet.MyBlueBullet;
+import com.hurteng.sandstorm.bullet.MyPurpleBullet;
+import com.hurteng.sandstorm.bullet.MyRedBullet;
 import com.hurteng.sandstorm.constant.ConstantUtil;
 import com.hurteng.sandstorm.constant.DebugConstant;
 import com.hurteng.sandstorm.constant.GameConstant;
@@ -150,12 +150,12 @@ public class MyPlane extends GameObject implements IMyPlane {
 
     }
 
-    // TODO: 2017/6/13  玩家飞机的射击逻辑
     /**
      * 射击逻辑
      * @param canvas
      * @param planes
      */
+/*
     @Override
     public void shoot(Canvas canvas, List<EnemyPlane> planes) {
         for (Bullet obj : bullets) {
@@ -163,7 +163,7 @@ public class MyPlane extends GameObject implements IMyPlane {
                 for (EnemyPlane pobj : planes) {
                     if (pobj.isCanCollide()) {
                         if (obj.isCollide((GameObject) pobj)) {
-                            pobj.attacked(obj.getHarm());
+                            pobj.attackedEnemyPlane(obj.getHarm());
                             if (pobj.isExplosion()) {
                                 mainView.addGameScore(pobj.getScore());
                                 if (pobj instanceof SmallPlane) {
@@ -184,6 +184,66 @@ public class MyPlane extends GameObject implements IMyPlane {
             }
         }
     }
+*/
+
+
+    // TODO: 2017/6/13  玩家飞机的射击逻辑
+
+    /**
+     * 射击逻辑
+     *
+     * @param canvas
+     * @param planes
+     */
+    @Override
+    public void shoot(Canvas canvas, List<EnemyPlane> planes) {
+        for (Bullet bullet : bullets) {
+            if (bullet.isAlive()) {
+                // 绘制子弹
+                bullet.drawSelf(canvas);
+                // 检测子弹是否击中敌机
+                checkAttacked(planes, bullet);
+            }
+        }
+    }
+
+    /**
+     * 检测子弹是否击中敌机
+     * @param planes
+     * @param bullet
+     */
+    private void checkAttacked(List<EnemyPlane> planes, Bullet bullet) {
+        for (EnemyPlane enemyPlane : planes) {
+            boolean isCollide = enemyPlane.isCanCollide() && bullet.isCollide(enemyPlane);
+            if (isCollide) {
+                attackedEnemyPlane(bullet, enemyPlane);
+                break;
+            }
+        }
+    }
+
+    /**
+     * 击中敌机的逻辑处理
+     * @param bullet
+     * @param plane
+     */
+    private void attackedEnemyPlane(Bullet bullet, EnemyPlane plane) {
+        // 记录敌机的受损状态
+        plane.attacked(bullet.getHarm());
+        if (plane.isExplosion()) {
+            // 根据击毁的不同敌机增加相应的分数(同时播放爆炸音乐)
+            mainView.addGameScore(plane.getScore());
+            if (plane instanceof SmallPlane) {
+                mainView.playSound(2);
+            } else if (plane instanceof MiddlePlane) {
+                mainView.playSound(3);
+            } else if (plane instanceof BigPlane) {
+                mainView.playSound(4);
+            } else {
+                mainView.playSound(5);
+            }
+        }
+    }
 
     /**
      * 初始化子弹
@@ -200,6 +260,7 @@ public class MyPlane extends GameObject implements IMyPlane {
 
     /**
      * 更换子弹
+     *
      * @param type
      */
     @Override
@@ -209,21 +270,21 @@ public class MyPlane extends GameObject implements IMyPlane {
         if (isChangeBullet) {
             if (type == ConstantUtil.MYBULLET1) {
                 for (int i = 0; i < 6; i++) {
-                    MyBulletPurple bullet1 = (MyBulletPurple) factory
-                            .createMyBullet1(resources);
+                    MyPurpleBullet bullet1 = (MyPurpleBullet) factory
+                            .createMyPurpleBullet(resources);
                     bullets.add(bullet1);
                 }
             } else if (type == ConstantUtil.MYBULLET2) {
                 for (int i = 0; i < 4; i++) {
-                    MyBulletRed bullet2 = (MyBulletRed) factory
-                            .createMyBullet2(resources);
+                    MyRedBullet bullet2 = (MyRedBullet) factory
+                            .createMyRedBullet(resources);
                     bullets.add(bullet2);
                 }
             }
 
         } else {
             for (int i = 0; i < 4; i++) {
-                MyBulletBlue bullet = (MyBulletBlue) factory.createMyBullet(resources);
+                MyBlueBullet bullet = (MyBlueBullet) factory.createMyBlueBullet(resources);
                 bullets.add(bullet);
             }
         }
@@ -246,6 +307,7 @@ public class MyPlane extends GameObject implements IMyPlane {
 
     /**
      * 设置飞机的无敌时间
+     *
      * @param time
      */
     public void setInvincibleTime(long time) {
@@ -258,6 +320,7 @@ public class MyPlane extends GameObject implements IMyPlane {
 
     /**
      * 检测是否为无敌状态
+     *
      * @return
      */
     public boolean isInvincible() {
@@ -266,6 +329,7 @@ public class MyPlane extends GameObject implements IMyPlane {
 
     /**
      * 设置导弹状态
+     *
      * @param isBoom
      */
     public void setMissileState(boolean isBoom) {
@@ -274,6 +338,7 @@ public class MyPlane extends GameObject implements IMyPlane {
 
     /**
      * 检测导弹状态（是否已经引爆）
+     *
      * @return
      */
     public boolean getMissileState() {
@@ -282,6 +347,7 @@ public class MyPlane extends GameObject implements IMyPlane {
 
     /**
      * 设置是否为受损状态
+     *
      * @param arg
      */
     public void setDamaged(boolean arg) {
@@ -290,6 +356,7 @@ public class MyPlane extends GameObject implements IMyPlane {
 
     /**
      * 检测是否为受损状态
+     *
      * @return
      */
     public boolean getDamaged() {

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.SoundPool;
 
-import com.hurteng.sandstorm.myplane.MainActivity;
+import com.hurteng.sandstorm.MainActivity;
 import com.hurteng.sandstorm.myplane.R;
 
 import java.util.HashMap;
@@ -39,7 +39,7 @@ public class GameSoundPool {
     }
 
     /**
-     * 播放游戏音乐
+     * 播放游戏背音乐
      * @param sound
      * @param loop
      */
