@@ -7,9 +7,9 @@ import android.graphics.Canvas;
 import android.os.SystemClock;
 
 import com.hurteng.sandstorm.bullet.Bullet;
-import com.hurteng.sandstorm.bullet.MyBullet;
-import com.hurteng.sandstorm.bullet.MyBullet1;
-import com.hurteng.sandstorm.bullet.MyBullet2;
+import com.hurteng.sandstorm.bullet.MyBulletBlue;
+import com.hurteng.sandstorm.bullet.MyBulletPurple;
+import com.hurteng.sandstorm.bullet.MyBulletRed;
 import com.hurteng.sandstorm.constant.ConstantUtil;
 import com.hurteng.sandstorm.constant.DebugConstant;
 import com.hurteng.sandstorm.constant.GameConstant;
@@ -209,13 +209,13 @@ public class MyPlane extends GameObject implements IMyPlane {
         if (isChangeBullet) {
             if (type == ConstantUtil.MYBULLET1) {
                 for (int i = 0; i < 6; i++) {
-                    MyBullet1 bullet1 = (MyBullet1) factory
+                    MyBulletPurple bullet1 = (MyBulletPurple) factory
                             .createMyBullet1(resources);
                     bullets.add(bullet1);
                 }
             } else if (type == ConstantUtil.MYBULLET2) {
                 for (int i = 0; i < 4; i++) {
-                    MyBullet2 bullet2 = (MyBullet2) factory
+                    MyBulletRed bullet2 = (MyBulletRed) factory
                             .createMyBullet2(resources);
                     bullets.add(bullet2);
                 }
@@ -223,7 +223,7 @@ public class MyPlane extends GameObject implements IMyPlane {
 
         } else {
             for (int i = 0; i < 4; i++) {
-                MyBullet bullet = (MyBullet) factory.createMyBullet(resources);
+                MyBulletBlue bullet = (MyBulletBlue) factory.createMyBullet(resources);
                 bullets.add(bullet);
             }
         }

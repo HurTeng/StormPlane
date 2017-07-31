@@ -12,10 +12,10 @@ import com.hurteng.sandstorm.object.GameObject;
 /**
  * 我方机体的默认子弹
  */
-public class MyBullet extends Bullet {
+public class MyBulletBlue extends Bullet {
     private Bitmap bullet;         // 子弹图片
 
-    public MyBullet(Resources resources) {
+    public MyBulletBlue(Resources resources) {
         super(resources);
         this.harm = GameConstant.MYBULLET_HARM;
     }
@@ -30,7 +30,7 @@ public class MyBullet extends Bullet {
 
     @Override
     public void initBitmap() {
-        bullet = BitmapFactory.decodeResource(resources, R.drawable.bullet);
+        bullet = BitmapFactory.decodeResource(resources, R.drawable.my_bullet_blue);
         object_width = bullet.getWidth();
         object_height = bullet.getHeight();
     }

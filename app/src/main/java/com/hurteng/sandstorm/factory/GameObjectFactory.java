@@ -18,9 +18,9 @@ import com.hurteng.sandstorm.object.GameObject;
 import com.hurteng.sandstorm.object.LifeGoods;
 import com.hurteng.sandstorm.plane.MiddlePlane;
 import com.hurteng.sandstorm.object.MissileGoods;
-import com.hurteng.sandstorm.bullet.MyBullet;
-import com.hurteng.sandstorm.bullet.MyBullet1;
-import com.hurteng.sandstorm.bullet.MyBullet2;
+import com.hurteng.sandstorm.bullet.MyBulletBlue;
+import com.hurteng.sandstorm.bullet.MyBulletPurple;
+import com.hurteng.sandstorm.bullet.MyBulletRed;
 import com.hurteng.sandstorm.plane.MyPlane;
 import com.hurteng.sandstorm.plane.SmallPlane;
 
@@ -72,13 +72,13 @@ public class GameObjectFactory {
 
     // 我方子弹
     public GameObject createMyBullet(Resources resources) {
-        return new MyBullet(resources);
+        return new MyBulletBlue(resources);
     }
     public GameObject createMyBullet1(Resources resources) {
-        return new MyBullet1(resources);
+        return new MyBulletPurple(resources);
     }
     public GameObject createMyBullet2(Resources resources) {
-        return new MyBullet2(resources);
+        return new MyBulletRed(resources);
     }
 
     //Boss子弹

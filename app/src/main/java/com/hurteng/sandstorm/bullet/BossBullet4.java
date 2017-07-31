@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
 import com.hurteng.sandstorm.myplane.R;
-import com.hurteng.sandstorm.object.EnemyBullet;
 import com.hurteng.sandstorm.object.GameObject;
 
 import java.util.Random;

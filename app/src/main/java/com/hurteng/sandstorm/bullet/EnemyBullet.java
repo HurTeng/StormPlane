@@ -1,9 +1,9 @@
-package com.hurteng.sandstorm.object;
+package com.hurteng.sandstorm.bullet;
 
 import android.content.res.Resources;
 import android.graphics.Canvas;
 
-import com.hurteng.sandstorm.bullet.Bullet;
+import com.hurteng.sandstorm.object.GameObject;
 
 /**
  * 敌方子弹类

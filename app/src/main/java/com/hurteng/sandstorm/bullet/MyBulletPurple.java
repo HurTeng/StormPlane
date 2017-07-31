@@ -13,7 +13,7 @@ import com.hurteng.sandstorm.plane.SmallPlane;
 /**
  * 我方机体子弹1
  */
-public class MyBullet1 extends Bullet {
+public class MyBulletPurple extends Bullet {
     private Bitmap bullet;
     private float object_x2;
     private float object_y2;
@@ -21,7 +21,7 @@ public class MyBullet1 extends Bullet {
     private boolean attack;            // 命中状态
     private boolean attack2;
 
-    public MyBullet1(Resources resources) {
+    public MyBulletPurple(Resources resources) {
         super(resources);
         this.harm = GameConstant.MYBULLET1_HARM;
     }
@@ -39,7 +39,7 @@ public class MyBullet1 extends Bullet {
 
     @Override
     public void initBitmap() {
-        bullet = BitmapFactory.decodeResource(resources, R.drawable.bullet1);
+        bullet = BitmapFactory.decodeResource(resources, R.drawable.my_bullet_purple);
         object_width = bullet.getWidth();
         object_height = bullet.getHeight();
     }

@@ -12,11 +12,11 @@ import com.hurteng.sandstorm.object.GameObject;
 /**
  * 玩家飞机的子弹类2
  */
-public class MyBullet2 extends Bullet {
+public class MyBulletRed extends Bullet {
 	private Bitmap bullet; 		 // 子弹的图片
 	private boolean attack;		//标记子弹是否击中
 	
-	public MyBullet2(Resources resources) {
+	public MyBulletRed(Resources resources) {
 		super(resources);
 		this.harm = GameConstant.MYBULLET2_HARM;
 	}
@@ -33,7 +33,7 @@ public class MyBullet2 extends Bullet {
 	// 初始化图片资源的
 	@Override
 	public void initBitmap() {
-		bullet = BitmapFactory.decodeResource(resources, R.drawable.bullet2);
+		bullet = BitmapFactory.decodeResource(resources, R.drawable.my_bullet_red);
 		object_width = bullet.getWidth();
 		object_height = bullet.getHeight();
 	}
