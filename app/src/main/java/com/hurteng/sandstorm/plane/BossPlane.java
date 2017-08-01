@@ -49,6 +49,12 @@ public class BossPlane extends EnemyPlane {
 
     private GameObjectFactory factory;
 
+    private static final int STATE_NORMAL = 0; // 普通状态
+    private static final int STATE_ANGER = 1; // 愤怒状态
+    private static final int STATE_CRAZY = 2; // 疯狂状态
+    private static final int STATE_LIMIT = 3; // 极限状态
+
+
     private long bossappear_interval;//Boss出现的间隔时间
 
     public BossPlane(Resources resources) {
@@ -85,6 +91,7 @@ public class BossPlane extends EnemyPlane {
 
     /**
      * 初始化相关数据
+     *
      * @param arg0
      * @param arg1
      * @param arg2
@@ -127,36 +134,35 @@ public class BossPlane extends EnemyPlane {
                 R.drawable.bossplane_bomb);
         bossPlane_crazy = BitmapFactory.decodeResource(resources,
                 R.drawable.bossplane_crazy);
-        object_width = boosPlane.getWidth(); // ���ÿһ֡λͼ�Ŀ�
-        object_height = boosPlane.getHeight() / 2; // ���ÿһ֡λͼ�ĸ�
+        object_width = boosPlane.getWidth(); // 宽度
+        object_height = boosPlane.getHeight() / 2; // 高度
     }
 
     /**
      * 初始化子弹
      */
     public void initBullet() {
-        if (isFire) {
-            if (interval == 1) {
-                for (GameObject obj : bullets) {
-                    if (!obj.isAlive()) {
-                        obj.initial(0, object_x + object_width / 2, object_y
-                                + object_height);
-                        break;
-                    }
+        if (!isFire) return;
+
+        if (interval == 1) {
+            for (GameObject obj : bullets) {
+                if (!obj.isAlive()) {
+                    obj.initial(0, object_x + object_width / 2,
+                            object_y + object_height);
+                    break;
                 }
             }
+        }
 
-            interval++;
-            if (bulletType == ConstantUtil.BOSSBULLET_DEFAULT) {
-                if (interval >= 2) {
-                    interval = 1;
-                }
-            } else {
-                if (interval >= 30 / speedTime + 5) {
-                    interval = 1;
-                }
+        interval++;
+        if (bulletType == ConstantUtil.BOSSBULLET_DEFAULT) {
+            if (interval >= 2) {
+                interval = 1;
             }
-
+        } else {
+            if (interval >= 30 / speedTime + 5) {
+                interval = 1;
+            }
         }
 
     }
@@ -164,84 +170,105 @@ public class BossPlane extends EnemyPlane {
 
     /**
      * 绘制BOSS机体
+     *
      * @param canvas
      */
     @Override
     public void drawSelf(Canvas canvas) {
-        if (isAlive) {
+        if (!isAlive) return;
 
-            if (!isExplosion) {
-                // 极限状态
-                if (isLimit) {
-                    int y = (int) (currentFrame * object_height);
-                    canvas.save();
-                    canvas.clipRect(object_x, object_y,
-                            object_x + object_width, object_y + object_height);
-                    canvas.drawBitmap(bossPlane_crazy, object_x, object_y - y,
-                            paint);
-                    canvas.restore();
-                    currentFrame++;
-                    if (currentFrame >= 2) {
-                        currentFrame = 0;
-                    }
+        if (isExplosion) {
+            drawExplosion(canvas);
+        } else {
+            drawBoss(canvas);
+        }
+    }
 
-                }
+    /**
+     * 绘制Boss爆炸的状态
+     *
+     * @param canvas
+     */
+    private void drawExplosion(Canvas canvas) {
+        // 绘制爆炸时的图片
+        int y = (int) (currentFrame * object_height);
+        canvas.save();
+        canvas.clipRect(object_x, object_y, object_x + object_width,
+                object_y + object_height);
+        canvas.drawBitmap(boosPlaneBomb, object_x, object_y - y, paint);
+        canvas.restore();
 
-                // 疯狂状态
-                else if (isCrazy) {
-                    canvas.save();
-                    canvas.clipRect(object_x, object_y,
-                            object_x + object_width, object_y + object_height);
-                    canvas.drawBitmap(bossPlane_crazy, object_x, object_y
-                            - object_height, paint);
-                    canvas.restore();
-                }
-
-                // 愤怒状态
-                else if (isAnger) {
-                    canvas.save();
-                    canvas.clipRect(object_x, object_y,
-                            object_x + object_width, object_y + object_height);
-                    canvas.drawBitmap(boosPlane, object_x, object_y
-                            - object_height, paint);
-                    canvas.restore();
-
-                }
-
-                // 普通状态
-                else {
-                    canvas.save();
-                    canvas.clipRect(object_x, object_y,
-                            object_x + object_width, object_y + object_height);
-                    canvas.drawBitmap(boosPlane, object_x, object_y, paint);
-                    canvas.restore();
-                }
-
-                logic();
-                shoot(canvas); // 射击
-            } else {
-                int y = (int) (currentFrame * object_height);
-                canvas.save();
-                canvas.clipRect(object_x, object_y, object_x + object_width,
-                        object_y + object_height);
-                canvas.drawBitmap(boosPlaneBomb, object_x, object_y - y, paint);
-                canvas.restore();
-                currentFrame++;
-                if (currentFrame >= 5) {
-                    currentFrame = 0;
-                    isExplosion = false;
-                    isAlive = false;
-                    if (bulletType != ConstantUtil.BOSSBULLET_DEFAULT) {
-                        changeBullet(ConstantUtil.BOSSBULLET_DEFAULT);
-                    }
-                }
-
+        // 绘制帧动画
+        currentFrame++;
+        if (currentFrame >= 5) {
+            currentFrame = 0;
+            isExplosion = false;
+            isAlive = false;
+            if (bulletType != ConstantUtil.BOSSBULLET_DEFAULT) {
+                changeBullet(ConstantUtil.BOSSBULLET_DEFAULT);
             }
         }
     }
 
     /**
+     * 绘制Boss机体
+     *
+     * @param canvas
+     */
+    private void drawBoss(Canvas canvas) {
+        // 极限状态
+        if (isLimit) {
+            int y = (int) (currentFrame * object_height);
+            canvas.save();
+            canvas.clipRect(object_x, object_y,
+                    object_x + object_width, object_y + object_height);
+            canvas.drawBitmap(bossPlane_crazy, object_x, object_y - y,
+                    paint);
+            canvas.restore();
+            currentFrame++;
+            if (currentFrame >= 2) {
+                currentFrame = 0;
+            }
+
+        }
+
+        // 疯狂状态
+        else if (isCrazy) {
+            canvas.save();
+            canvas.clipRect(object_x, object_y,
+                    object_x + object_width, object_y + object_height);
+            canvas.drawBitmap(bossPlane_crazy, object_x, object_y
+                    - object_height, paint);
+            canvas.restore();
+        }
+
+        // 愤怒状态
+        else if (isAnger) {
+            canvas.save();
+            canvas.clipRect(object_x, object_y,
+                    object_x + object_width, object_y + object_height);
+            canvas.drawBitmap(boosPlane, object_x, object_y
+                    - object_height, paint);
+            canvas.restore();
+
+        }
+
+        // 普通状态
+        else {
+            canvas.save();
+            canvas.clipRect(object_x, object_y,
+                    object_x + object_width, object_y + object_height);
+            canvas.drawBitmap(boosPlane, object_x, object_y, paint);
+            canvas.restore();
+        }
+
+        logic();
+        shoot(canvas); // 射击
+    }
+
+    /**
      * 射击逻辑
+     *
      * @param canvas
      * @return
      */
@@ -433,206 +460,26 @@ public class BossPlane extends EnemyPlane {
         }
     }
 
+    /**
+     * 更换子弹类型
+     * @param type
+     */
     public void changeBullet(int type) {
         bulletType = type;
 
         // 清理原先的子弹
         bullets.clear();
 
-        // 通常状态
-        if (bulletType == ConstantUtil.BOSSBULLET_DEFAULT) {
-            for (int i = 0; i < 100; i++) {
-                // 生产子弹Default
-                BossDefaultBullet bullet_default = (BossDefaultBullet) factory
-                        .createBossBulletDefault(resources);
-                bullets.add(bullet_default);
 
-                if (speedTime >= 3) {
-                    if (speedTime == 3) {
-                        // 生产子弹4
-                        BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
-                                .createBossYHellfireBullet(resources);
-                        bullets.add(bullet4);
-                    } else if (speedTime == 4) {
-                        // 生产子弹5
-                        BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
-                                .createBossRHellfireBullet(resources);
-                        bullets.add(bullet5);
-                    } else {
-                        // 生产子弹4
-                        BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
-                                .createBossYHellfireBullet(resources);
-                        bullets.add(bullet4);
-
-                        // 生产子弹5
-                        BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
-                                .createBossRHellfireBullet(resources);
-                        bullets.add(bullet5);
-                    }
-                }
-
-            }
-        }
-
-        // 愤怒状态
-        else if (bulletType == ConstantUtil.BOSSBULLET_ANGER) {
-            for (int i = 0; i < 8; i++) {
-                if (speedTime <= 2) {
-                    // 生产子弹1
-                    BossSunBullet bullet1 = (BossSunBullet) factory
-                            .createBossSunBullet(resources);
-                    bullets.add(bullet1);
-
-                    // 生产子弹2
-                    BossTriangleBullet bullet2 = (BossTriangleBullet) factory
-                            .createBossTriangleBullet(resources);
-                    bullets.add(bullet2);
-                } else if (speedTime <= 4) {
-                    // 生产子弹1
-                    BossSunBullet bullet1 = (BossSunBullet) factory
-                            .createBossSunBullet(resources);
-                    bullets.add(bullet1);
-
-                    // 生产子弹3
-                    BossGThunderBullet bullet3 = (BossGThunderBullet) factory
-                            .createBossGThunderBullet(resources);
-                    bullets.add(bullet3);
-                } else {
-                    // 生产子弹1
-                    BossSunBullet bullet1 = (BossSunBullet) factory
-                            .createBossSunBullet(resources);
-                    bullets.add(bullet1);
-
-                    // 生产子弹2
-                    BossTriangleBullet bullet2 = (BossTriangleBullet) factory
-                            .createBossTriangleBullet(resources);
-                    bullets.add(bullet2);
-
-                    // 生产子弹3
-                    BossGThunderBullet bullet3 = (BossGThunderBullet) factory
-                            .createBossGThunderBullet(resources);
-                    bullets.add(bullet3);
-                }
-
-            }
-        }
-
-        // 疯狂状态
-        else if (bulletType == ConstantUtil.BOSSBULLET_CRAZY) {
-            // 弹夹数
-            int clip = speedTime + 4;
-            for (int i = 0; i < clip; i++) {
-                if (speedTime == 1) {
-                    // 生产子弹4
-                    BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
-                            .createBossYHellfireBullet(resources);
-                    bullets.add(bullet4);
-                } else if (speedTime == 2) {
-                    // 生产子弹5
-                    BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
-                            .createBossRHellfireBullet(resources);
-                    bullets.add(bullet5);
-                } else if (speedTime == 3) {
-                    // 生产子弹4
-                    BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
-                            .createBossYHellfireBullet(resources);
-                    bullets.add(bullet4);
-                    // 生产子弹5
-                    BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
-                            .createBossRHellfireBullet(resources);
-                    bullets.add(bullet5);
-                } else {
-                    // 生产子弹3
-                    BossGThunderBullet bullet3 = (BossGThunderBullet) factory
-                            .createBossGThunderBullet(resources);
-                    bullets.add(bullet3);
-
-                    // 生产子弹4
-                    BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
-                            .createBossYHellfireBullet(resources);
-                    bullets.add(bullet4);
-
-                    // 生产子弹5
-                    BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
-                            .createBossRHellfireBullet(resources);
-                    bullets.add(bullet5);
-
-                }
-
-            }
-
-        }
-
-        // 极限状态
-        else if (bulletType == ConstantUtil.BOSSBULLET_LIMIT) {
-            // 弹夹数
-            int clip = speedTime + 5;
-            for (int i = 0; i < clip; i++) {
-                if (speedTime == 1) {
-                    // 生产子弹5
-                    BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
-                            .createBossRHellfireBullet(resources);
-                    bullets.add(bullet5);
-                } else if (speedTime == 2) {
-                    // 生产子弹4
-                    BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
-                            .createBossYHellfireBullet(resources);
-                    bullets.add(bullet4);
-
-                    // 生产子弹5
-                    BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
-                            .createBossRHellfireBullet(resources);
-                    bullets.add(bullet5);
-                } else if (speedTime == 3) {
-                    // 生产子弹1
-                    BossSunBullet bullet1 = (BossSunBullet) factory
-                            .createBossSunBullet(resources);
-                    bullets.add(bullet1);
-                    // 生产子弹4
-                    BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
-                            .createBossYHellfireBullet(resources);
-                    bullets.add(bullet4);
-                    // 生产子弹5
-                    BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
-                            .createBossRHellfireBullet(resources);
-                    bullets.add(bullet5);
-                } else if (speedTime == 4) {
-                    // 生产子弹1
-                    BossSunBullet bullet1 = (BossSunBullet) factory
-                            .createBossSunBullet(resources);
-                    bullets.add(bullet1);
-
-                    // 生产子弹3
-                    BossGThunderBullet bullet3 = (BossGThunderBullet) factory
-                            .createBossGThunderBullet(resources);
-                    bullets.add(bullet3);
-
-                    // 生产子弹5
-                    BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
-                            .createBossRHellfireBullet(resources);
-                    bullets.add(bullet5);
-                } else {
-
-                    // 生产子弹1
-                    BossSunBullet bullet1 = (BossSunBullet) factory
-                            .createBossSunBullet(resources);
-                    bullets.add(bullet1);
-
-                    // 生产子弹5
-                    BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
-                            .createBossRHellfireBullet(resources);
-                    bullets.add(bullet5);
-
-                    // 生产子弹Default
-                    BossDefaultBullet bullet_default = (BossDefaultBullet) factory
-                            .createBossBulletDefault(resources);
-                    bullets.add(bullet_default);
-
-                }
-
-            }
-
-        } else {
+        if (bulletType == ConstantUtil.BOSSBULLET_DEFAULT) { // 普通状态
+            normalShooting();
+        } else if (bulletType == ConstantUtil.BOSSBULLET_ANGER) { // 愤怒状态
+            angerShooting();
+        } else if (bulletType == ConstantUtil.BOSSBULLET_CRAZY) { // 疯狂状态
+            crazyShooting();
+        } else if (bulletType == ConstantUtil.BOSSBULLET_LIMIT) { // 极限状态
+            limitShooting();
+        } else { // 其他情况
             for (int i = 0; i < 5; i++) {
                 // 生产普通子弹
                 BossFlameBullet bullet = (BossFlameBullet) factory
@@ -642,6 +489,207 @@ public class BossPlane extends EnemyPlane {
             }
         }
 
+    }
+
+    /**
+     * 极限射击模式
+     */
+    private void limitShooting() {
+        // 弹夹数
+        int clip = speedTime + 5;
+        for (int i = 0; i < clip; i++) {
+            if (speedTime == 1) {
+                // 生产子弹5
+                BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
+                        .createBossRHellfireBullet(resources);
+                bullets.add(bullet5);
+            } else if (speedTime == 2) {
+                // 生产子弹4
+                BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
+                        .createBossYHellfireBullet(resources);
+                bullets.add(bullet4);
+
+                // 生产子弹5
+                BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
+                        .createBossRHellfireBullet(resources);
+                bullets.add(bullet5);
+            } else if (speedTime == 3) {
+                // 生产子弹1
+                BossSunBullet bullet1 = (BossSunBullet) factory
+                        .createBossSunBullet(resources);
+                bullets.add(bullet1);
+                // 生产子弹4
+                BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
+                        .createBossYHellfireBullet(resources);
+                bullets.add(bullet4);
+                // 生产子弹5
+                BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
+                        .createBossRHellfireBullet(resources);
+                bullets.add(bullet5);
+            } else if (speedTime == 4) {
+                // 生产子弹1
+                BossSunBullet bullet1 = (BossSunBullet) factory
+                        .createBossSunBullet(resources);
+                bullets.add(bullet1);
+
+                // 生产子弹3
+                BossGThunderBullet bullet3 = (BossGThunderBullet) factory
+                        .createBossGThunderBullet(resources);
+                bullets.add(bullet3);
+
+                // 生产子弹5
+                BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
+                        .createBossRHellfireBullet(resources);
+                bullets.add(bullet5);
+            } else {
+
+                // 生产子弹1
+                BossSunBullet bullet1 = (BossSunBullet) factory
+                        .createBossSunBullet(resources);
+                bullets.add(bullet1);
+
+                // 生产子弹5
+                BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
+                        .createBossRHellfireBullet(resources);
+                bullets.add(bullet5);
+
+                // 生产子弹Default
+                BossDefaultBullet bullet_default = (BossDefaultBullet) factory
+                        .createBossBulletDefault(resources);
+                bullets.add(bullet_default);
+
+            }
+
+        }
+    }
+
+    /**
+     * 疯狂射击模式
+     */
+    private void crazyShooting() {
+        // 弹夹数
+        int clip = speedTime + 4;
+        for (int i = 0; i < clip; i++) {
+            if (speedTime == 1) {
+                // 生产子弹4
+                BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
+                        .createBossYHellfireBullet(resources);
+                bullets.add(bullet4);
+            } else if (speedTime == 2) {
+                // 生产子弹5
+                BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
+                        .createBossRHellfireBullet(resources);
+                bullets.add(bullet5);
+            } else if (speedTime == 3) {
+                // 生产子弹4
+                BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
+                        .createBossYHellfireBullet(resources);
+                bullets.add(bullet4);
+                // 生产子弹5
+                BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
+                        .createBossRHellfireBullet(resources);
+                bullets.add(bullet5);
+            } else {
+                // 生产子弹3
+                BossGThunderBullet bullet3 = (BossGThunderBullet) factory
+                        .createBossGThunderBullet(resources);
+                bullets.add(bullet3);
+
+                // 生产子弹4
+                BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
+                        .createBossYHellfireBullet(resources);
+                bullets.add(bullet4);
+
+                // 生产子弹5
+                BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
+                        .createBossRHellfireBullet(resources);
+                bullets.add(bullet5);
+
+            }
+
+        }
+    }
+
+    /**
+     * 愤怒射击模式
+     */
+    private void angerShooting() {
+        for (int i = 0; i < 8; i++) {
+            if (speedTime <= 2) {
+                // 生产子弹1
+                BossSunBullet bullet1 = (BossSunBullet) factory
+                        .createBossSunBullet(resources);
+                bullets.add(bullet1);
+
+                // 生产子弹2
+                BossTriangleBullet bullet2 = (BossTriangleBullet) factory
+                        .createBossTriangleBullet(resources);
+                bullets.add(bullet2);
+            } else if (speedTime <= 4) {
+                // 生产子弹1
+                BossSunBullet bullet1 = (BossSunBullet) factory
+                        .createBossSunBullet(resources);
+                bullets.add(bullet1);
+
+                // 生产子弹3
+                BossGThunderBullet bullet3 = (BossGThunderBullet) factory
+                        .createBossGThunderBullet(resources);
+                bullets.add(bullet3);
+            } else {
+                // 生产子弹1
+                BossSunBullet bullet1 = (BossSunBullet) factory
+                        .createBossSunBullet(resources);
+                bullets.add(bullet1);
+
+                // 生产子弹2
+                BossTriangleBullet bullet2 = (BossTriangleBullet) factory
+                        .createBossTriangleBullet(resources);
+                bullets.add(bullet2);
+
+                // 生产子弹3
+                BossGThunderBullet bullet3 = (BossGThunderBullet) factory
+                        .createBossGThunderBullet(resources);
+                bullets.add(bullet3);
+            }
+
+        }
+    }
+
+    /**
+     * 普通射击模式
+     */
+    private void normalShooting() {
+        for (int i = 0; i < 100; i++) {
+            // 生产子弹Default
+            BossDefaultBullet bullet_default = (BossDefaultBullet) factory
+                    .createBossBulletDefault(resources);
+            bullets.add(bullet_default);
+
+            if (speedTime >= 3) {
+                if (speedTime == 3) {
+                    // 生产子弹4
+                    BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
+                            .createBossYHellfireBullet(resources);
+                    bullets.add(bullet4);
+                } else if (speedTime == 4) {
+                    // 生产子弹5
+                    BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
+                            .createBossRHellfireBullet(resources);
+                    bullets.add(bullet5);
+                } else {
+                    // 生产子弹4
+                    BossYHellfireBullet bullet4 = (BossYHellfireBullet) factory
+                            .createBossYHellfireBullet(resources);
+                    bullets.add(bullet4);
+
+                    // 生产子弹5
+                    BossRHellfireBullet bullet5 = (BossRHellfireBullet) factory
+                            .createBossRHellfireBullet(resources);
+                    bullets.add(bullet5);
+                }
+            }
+
+        }
     }
 
 }

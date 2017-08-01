@@ -32,8 +32,8 @@ public class MyPlane extends GameObject implements IMyPlane {
     private long startTime; // 开始时间
     private long endTime; // 结束时间
     private boolean isChangeBullet; // 更换子弹类型
-    private Bitmap myplane;
-    private Bitmap myplane2;
+    private Bitmap mPlane;
+    private Bitmap mPlaneExplosion;
     private List<Bullet> bullets; // 子弹列表
     private MainView mainView;
     private GameObjectFactory factory;
@@ -72,36 +72,42 @@ public class MyPlane extends GameObject implements IMyPlane {
 
     @Override
     public void initBitmap() {
-        myplane = BitmapFactory.decodeResource(resources, R.drawable.myplane);
-        myplane2 = BitmapFactory.decodeResource(resources,
+        mPlane = BitmapFactory.decodeResource(resources, R.drawable.myplane);
+        mPlaneExplosion = BitmapFactory.decodeResource(resources,
                 R.drawable.myplaneexplosion);
 
-        object_width = myplane.getWidth() / 3;
-        object_height = myplane.getHeight();
+        object_width = mPlane.getWidth() / 3;
+        object_height = mPlane.getHeight();
     }
 
     @Override
     public void drawSelf(Canvas canvas) {
+        if (isDamaged) {
+            drawExplosion(canvas);
+        } else {
+            drawPlane(canvas);
+        }
+    }
 
-        if (isInvincible && !isDamaged) {
-            int x = (int) (currentFrame * object_width);
-            canvas.save();
-            canvas.clipRect(object_x, object_y, object_x + object_width,
-                    object_y + object_height);
-            canvas.drawBitmap(myplane, object_x - x, object_y, paint);
-            canvas.restore();
+    /**
+     * 绘制机体
+     *
+     * @param canvas
+     */
+    private void drawPlane(Canvas canvas) {
+        int x = (int) (currentFrame * object_width);
+        canvas.save();
+        canvas.clipRect(object_x, object_y, object_x + object_width,
+                object_y + object_height);
+        canvas.drawBitmap(mPlane, object_x - x, object_y, paint);
+        canvas.restore();
 
+        if (isInvincible) {
             currentFrame++;
             if (currentFrame >= 3) {
                 currentFrame = 0;
             }
-        } else if (isAlive && !isDamaged) {
-            int x = (int) (currentFrame * object_width);
-            canvas.save();
-            canvas.clipRect(object_x, object_y, object_x + object_width,
-                    object_y + object_height);
-            canvas.drawBitmap(myplane, object_x - x, object_y, paint);
-            canvas.restore();
+        } else if (isAlive) {
             if (bulletType == ConstantUtil.MYBULLET) {
                 currentFrame = 0;
             } else if (bulletType == ConstantUtil.MYBULLET1) {
@@ -109,29 +115,37 @@ public class MyPlane extends GameObject implements IMyPlane {
             } else if (bulletType == ConstantUtil.MYBULLET2) {
                 currentFrame = 2;
             }
-        } else {
-            int x = (int) (currentFrame * object_width);
-            canvas.save();
-            canvas.clipRect(object_x, object_y, object_x + object_width,
-                    object_y + object_height);
-            canvas.drawBitmap(myplane2, object_x - x, object_y, paint);
-            canvas.restore();
+        }
+    }
 
-            if (bulletType == ConstantUtil.MYBULLET) {
-                currentFrame++;
-                if (currentFrame >= 2) {
-                    currentFrame = 0;
-                }
-            } else if (bulletType == ConstantUtil.MYBULLET1) {
-                currentFrame++;
-                if (currentFrame >= 4) {
-                    currentFrame = 2;
-                }
-            } else if (bulletType == ConstantUtil.MYBULLET2) {
-                currentFrame++;
-                if (currentFrame >= 6) {
-                    currentFrame = 4;
-                }
+
+    /**
+     * 绘制爆炸时的机体
+     *
+     * @param canvas
+     */
+    private void drawExplosion(Canvas canvas) {
+        int x = (int) (currentFrame * object_width);
+        canvas.save();
+        canvas.clipRect(object_x, object_y, object_x + object_width,
+                object_y + object_height);
+        canvas.drawBitmap(mPlaneExplosion, object_x - x, object_y, paint);
+        canvas.restore();
+
+        if (bulletType == ConstantUtil.MYBULLET) {
+            currentFrame++;
+            if (currentFrame >= 2) {
+                currentFrame = 0;
+            }
+        } else if (bulletType == ConstantUtil.MYBULLET1) {
+            currentFrame++;
+            if (currentFrame >= 4) {
+                currentFrame = 2;
+            }
+        } else if (bulletType == ConstantUtil.MYBULLET2) {
+            currentFrame++;
+            if (currentFrame >= 6) {
+                currentFrame = 4;
             }
         }
     }
@@ -141,53 +155,14 @@ public class MyPlane extends GameObject implements IMyPlane {
         for (Bullet obj : bullets) {
             obj.release();
         }
-        if (!myplane.isRecycled()) {
-            myplane.recycle();
+        if (!mPlane.isRecycled()) {
+            mPlane.recycle();
         }
-        if (!myplane2.isRecycled()) {
-            myplane2.recycle();
+        if (!mPlaneExplosion.isRecycled()) {
+            mPlaneExplosion.recycle();
         }
 
     }
-
-    /**
-     * 射击逻辑
-     * @param canvas
-     * @param planes
-     */
-/*
-    @Override
-    public void shoot(Canvas canvas, List<EnemyPlane> planes) {
-        for (Bullet obj : bullets) {
-            if (obj.isAlive()) {
-                for (EnemyPlane pobj : planes) {
-                    if (pobj.isCanCollide()) {
-                        if (obj.isCollide((GameObject) pobj)) {
-                            pobj.attackedEnemyPlane(obj.getHarm());
-                            if (pobj.isExplosion()) {
-                                mainView.addGameScore(pobj.getScore());
-                                if (pobj instanceof SmallPlane) {
-                                    mainView.playSound(2);
-                                } else if (pobj instanceof MiddlePlane) {
-                                    mainView.playSound(3);
-                                } else if (pobj instanceof BigPlane) {
-                                    mainView.playSound(4);
-                                } else {
-                                    mainView.playSound(5);
-                                }
-                            }
-                            break;
-                        }
-                    }
-                }
-                obj.drawSelf(canvas);
-            }
-        }
-    }
-*/
-
-
-    // TODO: 2017/6/13  玩家飞机的射击逻辑
 
     /**
      * 射击逻辑
@@ -209,6 +184,7 @@ public class MyPlane extends GameObject implements IMyPlane {
 
     /**
      * 检测子弹是否击中敌机
+     *
      * @param planes
      * @param bullet
      */
@@ -224,6 +200,7 @@ public class MyPlane extends GameObject implements IMyPlane {
 
     /**
      * 击中敌机的逻辑处理
+     *
      * @param bullet
      * @param plane
      */
