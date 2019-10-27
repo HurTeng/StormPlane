@@ -26,6 +26,10 @@ import java.util.List;
  * 玩家的飞机
  */
 public class MyPlane extends GameObject implements IMyPlane {
+    private static int smallAmount;
+    private static int middleAmount;
+    private static int bigAmount;
+    private static int bossAmount;
     private static final boolean Random = false;
     private float middle_x;
     private float middle_y;
@@ -210,18 +214,46 @@ public class MyPlane extends GameObject implements IMyPlane {
         if (plane.isExplosion()) {
             // 根据击毁的不同敌机增加相应的分数(同时播放爆炸音乐)
             mainView.addGameScore(plane.getScore());
+
             if (plane instanceof SmallPlane) {
+                smallAmount+=1;
                 mainView.playSound(2);
             } else if (plane instanceof MiddlePlane) {
+                middleAmount+=1;
                 mainView.playSound(3);
             } else if (plane instanceof BigPlane) {
+                bigAmount+=1;
                 mainView.playSound(4);
             } else {
+                bossAmount+=1;
                 mainView.playSound(5);
             }
         }
     }
-
+    public static int getsmallAmount() {
+        return smallAmount;
+    }
+    public static int setsmallAmount() {
+        return smallAmount=0;
+    }
+    public static int getmiddleAmount() {
+        return middleAmount;
+    }
+    public static int setmiddleAmount() {
+        return middleAmount=0;
+    }
+    public static int getbigAmount() {
+        return bigAmount;
+    }
+    public static int setbigAmount() {
+        return bigAmount=0;
+    }
+    public static int getbossAmount() {
+        return bossAmount;
+    }
+    public static int setbossAmount() {
+        return bossAmount=0;
+    }
     /**
      * 初始化子弹
      */
