@@ -9,13 +9,13 @@ package com.hurteng.stormplane.constant;
 public interface GameConstant {
 
 	//初始相关
-	int LIFEAMOUNT = 5;// 初始生命值
-	int MISSILECOUNT = 5;// 初始导弹数
-	int LIFE_MAXCOUNT = 9;// 生命最大值
-	int MISSILE_MAXCOUNT = 9;// 导弹最大存有量
+	int LIFEAMOUNT = 10;// 初始生命值
+	int MISSILECOUNT = 10;// 初始导弹数
+	int LIFE_MAXCOUNT = 18;// 生命最大值
+	int MISSILE_MAXCOUNT = 18;// 导弹最大存有量
 	int GAMESPEED = 1;// 游戏初始速度倍率
 	int MAXGRADE = 6;// 游戏最高等级/速度倍率(游戏速度跟游戏等级相关，等级越高，速度越快)
-	int LEVELUP_SCORE = 50000;// 升级所需的积分
+	int LEVELUP_SCORE = 5000;// 升级所需的积分
 
 
 	//敌机总数量
@@ -26,18 +26,18 @@ public interface GameConstant {
 
 	//敌机血量
 	int SMALLPLANE_BLOOD = 1;// 小型机
-	int MIDDLEPLANE_BLOOD = 40;// 中型机
-	int BIGPLANE_BLOOD = 120;// 大型机
-	int BOSSPLANE_BLOOD = 1000;// Boss总血量
-	int BOSSPLANE_ANGER_BLOOD = 700;// Boss进入愤怒状态的血量值（小于Boss总血量）
-	int BOSSPLANE_CRAZY_BLOOD = 500;// Boss进入疯狂状态的血量值（小于Boss愤怒状态的血量）
-	int BOSSPLANE_LIMIT_BLOOD = 150;// Boss进入极限状态的血量值（小于Boss疯狂状态的血量）
+	int MIDDLEPLANE_BLOOD = 20;// 中型机
+	int BIGPLANE_BLOOD = 60;// 大型机
+	int BOSSPLANE_BLOOD = 500;// Boss总血量
+	int BOSSPLANE_ANGER_BLOOD = 350;// Boss进入愤怒状态的血量值（小于Boss总血量）
+	int BOSSPLANE_CRAZY_BLOOD = 250;// Boss进入疯狂状态的血量值（小于Boss愤怒状态的血量）
+	int BOSSPLANE_LIMIT_BLOOD = 75;// Boss进入极限状态的血量值（小于Boss疯狂状态的血量）
 
 	//敌机分数
 	int SMALLPLANE_SCORE = 100;// 小型机
 	int MIDDLEPLANE_SCORE = 300;// 中型机
-	int BIGPLANE_SCORE = 800;// 大型机
-	int BOSSPLANE_SCORE = 2000;// Boss
+	int BIGPLANE_SCORE = 1200;// 大型机
+	int BOSSPLANE_SCORE = 3000;// Boss
 
 	//物品出现所需的积分值
 	int MIDDLEPLANE_APPEARSCORE = 2000;// 中型机
@@ -49,7 +49,7 @@ public interface GameConstant {
 	int BULLET2_APPEARSCORE = 7000;// 子弹2
 
 	//伤害值
-	int MISSILE_HARM = 80;// 导弹
+	int MISSILE_HARM = 120;// 导弹
 	int MYBULLET_HARM = 1;// 我方初始子弹(默认值为1)
 	int MYBULLET1_HARM = 4;// 我方子弹1
 	int MYBULLET2_HARM = 5;// 我方子弹2
